@@ -63,22 +63,21 @@ footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
 .print-text{display:none;white-space:pre-wrap;word-break:break-all;border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin-top:8px;min-height:30px;background:#fbfcfe}
 .print-head{display:none}
 
-.photos{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.photo{position:relative;width:120px;margin:0}
-.photo img{display:block;width:120px;height:120px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#f1f5f9}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:10px 0}
+.photo{position:relative;margin:0;min-width:0}
+.photo img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain;border-radius:10px;border:1px solid var(--line);background:#eef2f7}
 .photo figcaption{font-size:11px;color:var(--sub);margin-top:3px;text-align:center}
 .photo.main img{border:2px solid var(--blue)}
 .photo.main figcaption{color:var(--blue);font-weight:700}
 .photo-del{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(15,23,42,.7);color:#fff;font-size:14px;line-height:24px;padding:0}
-.photo-add{width:120px;height:120px;border:1.5px dashed #94a3b8;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:var(--blue);font-weight:700;font-size:13px;background:#fbfcfe}
+.photo-add{aspect-ratio:1/1;border:1.5px dashed #94a3b8;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:var(--blue);font-weight:700;font-size:13px;background:#fbfcfe}
 .photo-add small{font-weight:400;font-size:10.5px;color:var(--mute)}
 .photo-add.full{display:none}
-body.print-mode .photos{gap:5px;margin:4px 0}
-body.print-mode .photo,body.print-mode .photo img{width:78px}
-body.print-mode .photo img{height:78px;border-radius:5px}
-body.print-mode .photo figcaption{font-size:8px;margin-top:1px}
+body.print-mode .photos{grid-template-columns:repeat(4,1fr);gap:4px;margin:4px 0}
+body.print-mode .photo img{border-radius:4px}
+body.print-mode .photo figcaption{font-size:7.5px;margin-top:1px}
 body.print-mode .photo-del,body.print-mode .photo-add{display:none}
-
+body.print-mode .photos:not(:has(.photo)){display:none}
 /* ---------- 한 장 출력 레이아웃 ---------- */
 body.print-mode{background:#fff;font-size:10px;line-height:1.45}
 body.print-mode .wrap{width:718px;max-width:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;align-items:start;transform-origin:top left}
@@ -179,7 +178,7 @@ body.print-mode footer{display:none}
   <div class="photos" id="photos">
     <label class="photo-add" id="photoAdd">
       <input type="file" id="photoInput" accept="image/*" multiple hidden>
-      <span>＋ 사진 추가</span><small>최대 3장 · 첫 장을 깊게</small>
+      <span>＋ 사진 추가</span><small>최대 4장 · 첫 장을 깊게</small>
     </label>
   </div>
   <ol class="q">
@@ -340,6 +339,7 @@ document.getElementById('pdfBtn').onclick=()=>{enterPrint();
 
 /* ---------- ③ 참여자 사진 ---------- */
 const PHOTO_KEY='spectra-interview-photos-v1';
+const MAX_PHOTOS=4;
 let photos=[];
 const photoBox=document.getElementById('photos'),photoAdd=document.getElementById('photoAdd');
 function renderPhotos(){
@@ -352,17 +352,17 @@ function renderPhotos(){
     del.onclick=()=>{photos.splice(i,1);renderPhotos();savePhotos()};
     f.append(img,del,cap);photoBox.insertBefore(f,photoAdd);
   });
-  photoAdd.classList.toggle('full',photos.length>=3);
+  photoAdd.classList.toggle('full',photos.length>=MAX_PHOTOS);
 }
 function savePhotos(){try{localStorage.setItem(PHOTO_KEY,JSON.stringify(photos))}catch(e){alert('사진이 브라우저 저장 공간을 넘어 새로고침하면 사라질 수 있어요. 인터뷰가 끝나면 바로 PDF로 저장해 주세요.')}}
 function shrink(file){return new Promise((res,rej)=>{
   const url=URL.createObjectURL(file);const img=new Image();
-  img.onload=()=>{const M=900,r=Math.min(1,M/Math.max(img.width,img.height));
+  img.onload=()=>{const M=1000,r=Math.min(1,M/Math.max(img.width,img.height));
     const c=document.createElement('canvas');c.width=Math.round(img.width*r);c.height=Math.round(img.height*r);
     c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);res(c.toDataURL('image/jpeg',.78))};
   img.onerror=()=>{URL.revokeObjectURL(url);rej()};img.src=url;})}
 document.getElementById('photoInput').onchange=async e=>{
-  const files=[...e.target.files].slice(0,3-photos.length);
+  const files=[...e.target.files].slice(0,MAX_PHOTOS-photos.length);
   for(const f of files){try{photos.push(await shrink(f))}catch(_){alert('이 사진은 열 수 없어요. 다른 형식으로 다시 올려 주세요.')}}
   e.target.value='';renderPhotos();savePhotos();
 };
