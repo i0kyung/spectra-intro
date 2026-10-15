@@ -60,11 +60,25 @@ textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:1
 .codes span{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:#fff}
 body.participant .host{display:none}
 footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
-@media print{.toolbar,.btn{display:none}.card{break-inside:avoid}}
+.print-text{display:none;white-space:pre-wrap;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:14px;min-height:40px;background:#fbfcfe}
+.print-head{display:none}
+@media print{
+  @page{size:A4;margin:14mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff}
+  .wrap{padding:0;max-width:none}
+  .toolbar,.pick button:not(.on){display:none}
+  .card{break-inside:avoid;border-color:#cbd5e1}
+  textarea{display:none}
+  .print-text{display:block}
+  .print-head{display:block;font-size:12px;color:var(--sub);margin-bottom:8px}
+  .chip:not(.must):not(.skip){opacity:.45}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
+<div class="print-head" id="printHead"></div>
 <header>
   <div class="eyebrow">SPECTRA · 사용자 심화 조사</div>
   <h1>생일카페 팬 인터뷰지</h1>
@@ -79,7 +93,8 @@ footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
 <div class="toolbar">
   <button class="btn" id="modeBtn" aria-pressed="false">참여자 화면 모드</button>
   <button class="btn" id="shuffleBtn">컨셉 순서 섞기</button>
-  <button class="btn primary" id="copyBtn">기록 복사</button>
+  <button class="btn" id="copyBtn">기록 복사</button>
+  <button class="btn primary" id="pdfBtn">PDF 저장</button>
   <span class="total">총 약 25분</span>
 </div>
 
@@ -219,6 +234,30 @@ document.getElementById('copyBtn').onclick=async()=>{
   document.querySelectorAll('.concept').forEach(c=>{const on=[...c.querySelectorAll('.pick .on')].map(b=>b.textContent);out+=`${c.dataset.c}: ${on.join(', ')||'-'}\n`});
   try{await navigator.clipboard.writeText(out);alert('기록을 복사했습니다.')}catch(e){prompt('아래 내용을 복사하세요',out)}
 };
+
+/* ---------- PDF 저장 ---------- */
+function preparePrint(){
+  document.querySelectorAll('textarea').forEach(t=>{
+    let d=t.nextElementSibling;
+    if(!d||!d.classList.contains('print-text')){d=document.createElement('div');d.className='print-text';t.after(d)}
+    d.textContent=t.value.trim()||'(기록 없음)';
+  });
+  const order=[...document.getElementById('concepts').children].map(c=>c.dataset.c).join(' → ');
+  document.getElementById('printHead').textContent=`참여자 ${pid.value||'-'} · ${pdate.value||'-'} · ${pip.value||'-'} · 컨셉 제시 순서 ${order}`;
+}
+let wasParticipant=false,oldTitle=document.title;
+window.addEventListener('beforeprint',()=>{
+  preparePrint();
+  wasParticipant=document.body.classList.contains('participant');
+  document.body.classList.remove('participant');
+  oldTitle=document.title;
+  document.title=`SPECTRA_팬인터뷰_${pid.value||'참여자'}_${(pdate.value||'').replace(/[\\/:*?"<>|\s]+/g,'-')}`.replace(/_$/,'');
+});
+window.addEventListener('afterprint',()=>{
+  if(wasParticipant)document.body.classList.add('participant');
+  document.title=oldTitle;
+});
+document.getElementById('pdfBtn').onclick=()=>window.print();
 
 /* ---------- 임시 저장 ---------- */
 const KEY='spectra-interview-draft';
