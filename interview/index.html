@@ -78,6 +78,14 @@ body.print-mode .photo img{border-radius:4px}
 body.print-mode .photo figcaption{font-size:7.5px;margin-top:1px}
 body.print-mode .photo-del,body.print-mode .photo-add{display:none}
 body.print-mode .photos:not(:has(.photo)){display:none}
+.qa-list{margin-top:6px}
+.qa{padding:12px 0;border-top:1px solid var(--line)}
+.qa:first-child{border-top:0}
+.qq{display:flex;gap:8px;margin:0;font-size:15px;font-weight:600;line-height:1.45}
+.qq .n{flex:none;width:22px;height:22px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.qa .tg{margin:8px 0 0 30px}
+.qa .tg-q{flex:none;font-size:11px;font-weight:600;color:var(--mute);margin-right:2px}
+.qa.host-q .qq{color:var(--sub);font-weight:500;font-size:13px}
 .consent{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--sub);flex:1 1 100%}
 .consent input{width:16px;height:16px;accent-color:var(--blue)}
 textarea{min-height:56px}
@@ -92,6 +100,14 @@ body.participant #modeBtn{background:#f59e0b;border-color:#f59e0b;color:#fff}
 body.participant .meta{display:none}
 body.participant textarea,body.participant .photo-del{display:none}
 body.print-mode .consent{display:none}
+body.print-mode .qa-list{margin-top:2px}
+body.print-mode .qa{padding:2px 0;border:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 6px}
+body.print-mode .qq{font-size:9.5px;font-weight:500;gap:4px}
+body.print-mode .qa.host-q .qq{font-size:9.5px}
+body.print-mode .qq .n{width:13px;height:13px;font-size:7.5px}
+body.print-mode .qa .tg{margin:0;display:inline-flex}
+body.print-mode .qa .tg-q{font-size:8px}
+body.print-mode .qa .tg-q::after{content:""}
 body.print-mode .tagset{margin-top:4px;padding-top:3px}
 body.print-mode .tg{gap:3px;margin:0 0 2px;flex-wrap:wrap}
 body.print-mode .tg-q{flex:none;font-size:8.5px}
@@ -177,26 +193,16 @@ body.print-mode footer{display:none}
 
 <section class="card" data-sec="① 워밍업">
   <div class="sec-head"><span class="num">①</span><h2>워밍업</h2><span class="time">2분</span></div>
-  <ol class="q">
-    <li>어떤 아티스트나 캐릭터를 좋아하시나요?</li>
-    <li>가장 최근에 간 생일카페는 언제였고, 누구와 갔나요?</li>
-  </ol>
-  <p class="note host"><b>사전 스크리너로 확인:</b> 최근 3개월 내 방문 여부, 1년간 방문 횟수.</p>
-  <div class="tagset host"></div>
+  <div class="qa-list" data-k="①"></div>
+  <p class="note host">방문 횟수는 설문 응답으로 확인.</p>
   <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <section class="card" data-sec="② 방문 복원">
   <div class="sec-head"><span class="num">②</span><h2>최근 방문 복원</h2><span class="time">5분</span></div>
   <div class="prompt">"가장 최근에 갔던 생일카페를, 가기 전부터 나온 순간까지 순서대로 이야기해 주세요."</div>
-  <ol class="q">
-    <li>들어가서 가장 먼저 본 것은 무엇이었나요?</li>
-    <li>가장 오래 머문 곳은 어디였나요?</li>
-    <li>어느 순간에 '오길 잘했다'고 느꼈나요?</li>
-    <li>기대와 달랐던 순간이 있었나요?</li>
-  </ol>
-  <p class="probe"><b>꼬리 질문</b> · 그 직전에 무엇을 하고 있었나요? · 왜 거기서 멈췄나요?</p>
-  <div class="tagset host"></div>
+  <div class="qa-list" data-k="②"></div>
+  <p class="probe host">꼬리 질문 · 그 직전엔 뭘 하고 있었나요? · 왜 거기서 멈췄나요?</p>
   <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
@@ -209,77 +215,52 @@ body.print-mode footer{display:none}
       <span>＋ 사진 추가</span><small>최대 4장 · 첫 장을 깊게</small>
     </label>
   </div>
-  <ol class="q">
-    <li>이 사진을 왜 찍었나요?</li>
-    <li>이 장면에서 가장 중요한 것은 무엇인가요?</li>
-    <li>그게 그 아티스트답다고 느껴졌나요? 어떤 점에서요?</li>
-    <li>누구에게 공유했나요? 왜 이 장면이었나요?</li>
-  </ol>
-  <p class="probe"><b>나머지 사진</b> · "이건 왜 찍었나요?"만 짧게.</p>
-  <div class="tagset host"></div>
+  <div class="qa-list" data-k="③"></div>
+  <p class="probe host">나머지 사진은 "왜 찍었나요?"만 짧게.</p>
   <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <section class="card" data-sec="④ 알아봐 준 순간">
   <div class="sec-head"><span class="num">④</span><h2>'나'로 연결된 순간</h2><span class="time">3분</span></div>
   <p class="goal host">참여자가 이 감각을 ②·③에서 먼저 꺼냈는지 같이 표시한다.</p>
-  <ol class="q">
-    <li>생일카페나 팬 활동에서 '나를 위한 거다', '나를 기억해 준다'고 느낀 순간이 있었나요?</li>
-    <li>이름·메시지처럼 나에게 맞춰진 특전이나 이벤트를 받아본 적 있나요? 그때 무엇을 했나요?</li>
-    <li>반대로 '그냥 수많은 방문객 중 한 명'처럼 느껴진 순간은요?</li>
-  </ol>
-  <div class="tagset host"></div>
+  <div class="qa-list" data-k="④"></div>
   <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <section class="card wide" data-sec="⑤ 좋은 경험">
   <div class="sec-head"><span class="num">⑤</span><h2>좋은 생일카페란</h2><span class="time">4분</span></div>
   <div class="prompt">"OO님이 생각하는 좋은 생일카페는 어떤 곳인가요?" <span class="host" style="font-weight:400">— 자유 답변 먼저</span></div>
-  <p class="legend">그다음 보여주기 · 한 번 누르면 <b>꼭 있어야 함</b>(2개), 두 번 누르면 <b>없어도 됨</b>(2개)</p>
+  <p class="legend">한 번 누르면 <b>꼭 있어야 함</b> · 두 번 누르면 <b>없어도 됨</b></p>
   <div class="chips" id="valueChips"></div>
-  <ol class="q">
-    <li>다음 생일카페에서 딱 하나만 달라질 수 있다면 무엇이면 좋겠나요?</li>
-  </ol>
-  <div class="tagset host"></div>
+  <div class="qa-list" data-k="⑤"></div>
   <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <section class="card wide" data-sec="⑥ 컨셉 테스트">
   <div class="sec-head"><span class="num">⑥</span><h2>세 가지 방향 보기</h2><span class="time">6분</span></div>
-  <p class="goal">아래 세 장면을 같이 봐 주세요. 실제 생일카페 벽 한쪽에 설치된다고 생각하면 됩니다.</p>
+  <p class="goal">생일카페 벽 한쪽에 있다고 생각하고 봐 주세요.</p>
   <div class="concepts" id="concepts">
     <div class="concept" data-c="A">
       <svg viewBox="0 0 300 220" id="svgA"></svg>
       <div class="body"><span class="letter">A</span>
         <p>기존 포토존에 겹겹의 레이어·오브제·조명을 더해 사진이 입체적으로 보이게 한다.</p>
-        <div class="state host" id="stA"></div>
-        <div class="pick host"></div></div>
+        <div class="state host" id="stA"></div></div>
     </div>
     <div class="concept" data-c="B">
       <svg viewBox="0 0 300 220" id="svgB"></svg>
       <div class="body"><span class="letter">B</span>
         <p>영상·빛·움직임·소리로 벽 전체가 바뀌어 아티스트의 세계 안에 들어온 듯한 공간이 된다.</p>
-        <div class="state host" id="stB"></div>
-        <div class="pick host"></div></div>
+        <div class="state host" id="stB"></div></div>
     </div>
     <div class="concept" data-c="C">
       <svg viewBox="0 0 300 220" id="svgC"></svg>
       <div class="body"><span class="letter">C</span>
         <p>화면 속 캐릭터가 다가온 사람을 알아보고 눈을 맞추며, 손을 들면 하이파이브로 반응한다.</p>
-        <div class="state host" id="stC"></div>
-        <div class="pick host"></div></div>
+        <div class="state host" id="stC"></div></div>
     </div>
   </div>
-  <ol class="q" style="margin-top:16px">
-    <li>생일카페에 실제로 있다면 가장 먼저 가볼 것은? 왜요?</li>
-    <li>왜 그걸 골랐나요?</li>
-    <li>사진·영상으로 남기고 싶은 것은?</li>
-    <li>한 번 해보고 끝날 것 같은 것은?</li>
-    <li>뒤에 사람이 줄 서 있다면, 30초 안에 해볼 것 같은 것은? 민망하거나 부담스러운 것은?</li>
-    <li>다음 생일카페에 이게 있다면, 그것 때문에 한 번 더 갈 것 같은 것은?</li>
-  </ol>
-  <p class="note host"><b>진행 메모:</b> 세 안을 같은 말투·같은 길이로 소개한다. 참여자마다 '컨셉 순서 섞기'로 순서를 바꾼다.</p>
-  <div class="tagset host"></div>
+  <div class="qa-list" data-k="⑥"></div>
+  <p class="note host">세 안을 같은 말투로 소개하고, 참여자마다 순서를 섞는다.</p>
   <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
@@ -309,54 +290,58 @@ const chipBox=document.getElementById('valueChips');
 values.forEach(v=>{const b=document.createElement('button');b.className='chip';b.textContent=v;b.dataset.s='0';
   b.onclick=()=>{const s=(+b.dataset.s+1)%3;b.dataset.s=s;b.className='chip'+(s==1?' must':s==2?' skip':'')};chipBox.appendChild(b)});
 
-/* ---------- 답변 태그 ---------- */
-const TAGS={
+/* ---------- 질문 + 답변 태그 ---------- */
+const ABC=['A','B','C'];
+const QA={
  '①':[
-  {q:'좋아하는 분야',o:['K-POP','애니','웹툰','게임','캐릭터','배우·기타']},
-  {q:'최근 방문',s:1,o:['1개월 내','3개월 내','그 이전']},
-  {q:'동행',s:1,o:['혼자','친구 1명','여러 명']}],
+  {q:'좋아하는 아티스트·캐릭터는?',g:[{o:['K-POP','애니','웹툰','게임','캐릭터','기타']}]},
+  {q:'최근 생일카페는 언제, 누구와?',g:[{l:'언제',s:1,o:['1개월 내','3개월 내','그 이전']},{l:'누구와',s:1,o:['혼자','친구 1명','여러 명']}]}],
  '②':[
-  {q:'가장 먼저 본 것',o:['대형 사진·배너','영상 화면','장식·조명','포토존','특전 줄','굿즈·소품','메뉴·음료']},
-  {q:'오래 머문 곳',o:['포토존','사진·배너 벽','영상 화면','특전·굿즈','좌석','메시지 보드']},
-  {q:"'오길 잘했다' 순간",o:['최애 분위기를 느낄 때','사진이 잘 나왔을 때','특전을 받을 때','다른 팬과 교류','영상·음악','특별히 없음']},
-  {q:'기대와 달랐던 점',o:['대기·혼잡','공간이 좁음','생각보다 평범','특전 품절','사진이 기대 이하','없음']}],
+  {q:'들어가서 가장 먼저 본 것은?',g:[{o:['대형 사진·배너','영상 화면','장식·조명','포토존','특전 줄','굿즈·소품','메뉴·음료']}]},
+  {q:'가장 오래 머문 곳은?',g:[{o:['포토존','사진·배너 벽','영상 화면','특전·굿즈','좌석','메시지 보드']}]},
+  {q:"'오길 잘했다' 느낀 순간은?",g:[{o:['최애 분위기','사진이 잘 나옴','특전 받음','팬 교류','영상·음악','없음']}]},
+  {q:'기대와 달랐던 점은?',g:[{o:['대기·혼잡','좁음','생각보다 평범','특전 품절','사진 기대 이하','없음']}]}],
  '③':[
-  {q:'찍은 이유',o:['기록','공유하려고','예뻐서','최애다워서','인증']},
-  {q:'가장 중요한 요소',o:['최애 사진','색감·조명','소품·오브제','문구·메시지','크기·스케일','함께 간 사람']},
-  {q:'아티스트다움',s:1,o:['아주 그렇다','조금','아니다']},
-  {q:'공유',o:['SNS 게시','친구에게','팬 커뮤니티','안 함']}],
+  {q:'이 사진을 왜 찍었나요?',g:[{o:['기록','공유하려고','예뻐서','최애다워서','인증']}]},
+  {q:'이 장면에서 가장 중요한 것은?',g:[{o:['최애 사진','색감·조명','소품·오브제','문구','크기·스케일','함께 간 사람']}]},
+  {q:'그 아티스트답다고 느꼈나요?',g:[{s:1,o:['아주 그렇다','조금','아니다']}]},
+  {q:'누구에게 공유했나요?',g:[{o:['SNS','친구','팬 커뮤니티','안 함']}]}],
  '④':[
-  {q:"'나를 위한 것' 경험",s:1,o:['있음','없음']},
-  {q:'어떤 경험',o:['이름·메시지 특전','특전 당첨','주최자·스태프 응대','손편지·포토카드','팬싸·영통','기타']},
-  {q:'그때 한 행동',o:['사진 찍음','SNS 공유','보관함','친구에게 자랑','없음']},
-  {q:"'여러 명 중 하나' 느낌",o:['줄·대기','똑같은 특전','빨리 비켜야 함','없음']},
-  {q:'먼저 꺼냈나',s:1,h:'진행자 판단',o:['②·③에서 먼저 언급','④에서 처음']}],
+  {q:"'나를 위한 거다' 느낀 순간이 있었나요?",g:[{s:1,o:['있음','없음']}]},
+  {q:'어떤 경험이었고, 그때 뭘 했나요?',g:[{l:'경험',o:['이름·메시지 특전','특전 당첨','스태프 응대','손편지·포카','팬싸·영통','기타']},{l:'행동',o:['사진','SNS 공유','보관','자랑','없음']}]},
+  {q:"반대로 '여러 명 중 하나' 같았던 순간은?",g:[{o:['줄·대기','똑같은 특전','빨리 비켜야 함','없음']}]},
+  {q:'이 얘기를 ②·③에서 먼저 꺼냈나요?',host:1,g:[{s:1,o:['먼저 꺼냄','여기서 처음']}]}],
  '⑤':[
-  {q:'딱 하나 달라진다면',o:['공간 연출','체험 요소','특전·굿즈','덜 붐볐으면','세계관 표현','나에게 맞춘 것']}],
+  {q:'딱 하나 달라진다면?',g:[{o:['공간 연출','체험','특전·굿즈','덜 붐빔','세계관','나에게 맞춘 것']}]}],
  '⑥':[
-  {q:'가장 먼저 가볼 것',s:1,o:['A','B','C']},
-  {q:'고른 이유',h:'답을 듣고 분류',o:['새로워서','최애와 가까운 느낌','사진·영상 남기기','재미있어서','아티스트다워서','부담 없어서']},
-  {q:'30초 안에 해볼 것',o:['A','B','C']},
-  {q:'다시 갈 이유가 될 것',o:['A','B','C','없음']}]
+  {q:'가장 먼저 가볼 것은?',g:[{s:1,o:ABC}]},
+  {q:'왜 그걸 골랐나요?',g:[{o:['새로워서','최애와 가까운 느낌','사진 남기기','재미','아티스트다움','부담 없음']}]},
+  {q:'사진·영상으로 남기고 싶은 것은?',g:[{o:ABC}]},
+  {q:'한 번 하고 끝날 것은?',g:[{o:ABC}]},
+  {q:'줄 서 있으면 30초 안에 해볼 것은?',g:[{o:ABC}]},
+  {q:'민망하거나 부담스러운 것은?',g:[{o:[...ABC,'없음']}]},
+  {q:'이것 때문에 한 번 더 갈 것은?',g:[{o:[...ABC,'없음']}]}]
 };
-document.querySelectorAll('section[data-sec]').forEach(sec=>{
-  const key=sec.dataset.sec[0],box=sec.querySelector('.tagset');
-  (TAGS[key]||[]).forEach(g=>{
-    const row=document.createElement('div');row.className='tg';
-    const q=document.createElement('span');q.className='tg-q';q.textContent=g.q;
-    if(g.s||g.h){const em=document.createElement('em');em.textContent=[g.s?'하나만':'',g.h||''].filter(Boolean).join(' · ');q.appendChild(em)}
-    row.appendChild(q);
-    g.o.forEach(o=>{const b=document.createElement('button');b.type='button';b.className='tag';b.textContent=o;
-      b.onclick=()=>{if(g.s&&!b.classList.contains('on'))row.querySelectorAll('.tag.on').forEach(x=>x.classList.remove('on'));b.classList.toggle('on');setTimeout(save,0)};
-      row.appendChild(b)});
-    box.appendChild(row);
+document.querySelectorAll('.qa-list').forEach(list=>{
+  (QA[list.dataset.k]||[]).forEach((item,qi)=>{
+    const qa=document.createElement('div');qa.className='qa'+(item.host?' host host-q':'');
+    const qq=document.createElement('p');qq.className='qq';
+    const n=document.createElement('span');n.className='n';n.textContent=qi+1;
+    const t=document.createElement('span');t.className='qt';t.textContent=item.q;
+    qq.append(n,t);qa.appendChild(qq);
+    item.g.forEach(g=>{
+      const row=document.createElement('div');row.className='tg host';
+      if(g.l){const l=document.createElement('span');l.className='tg-q';l.textContent=g.l;row.appendChild(l)}
+      g.o.forEach(o=>{const b=document.createElement('button');b.type='button';b.className='tag';b.textContent=o;
+        b.onclick=()=>{if(g.s&&!b.classList.contains('on'))row.querySelectorAll('.tag.on').forEach(x=>x.classList.remove('on'));b.classList.toggle('on');setTimeout(save,0)};
+        row.appendChild(b)});
+      qa.appendChild(row);
+    });
+    list.appendChild(qa);
   });
 });
-function tagSummary(sec){return [...sec.querySelectorAll('.tg')].map(r=>{const on=[...r.querySelectorAll('.tag.on')].map(b=>b.textContent);return on.length?`${r.querySelector('.tg-q').firstChild.textContent}: ${on.join(', ')}`:''}).filter(Boolean).join('\n')}
+function tagSummary(sec){return [...sec.querySelectorAll('.qa')].map(r=>{const on=[...r.querySelectorAll('.tag.on')].map(b=>b.textContent);return on.length?`${r.querySelector('.qt').textContent} → ${on.join(', ')}`:''}).filter(Boolean).join('\n')}
 
-/* ---------- 컨셉별 반응 기록 ---------- */
-const tags=['먼저 가볼 것','남기고 싶음','한 번 끝','부담됨','재방문'];
-document.querySelectorAll('.concept .pick').forEach(p=>tags.forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>b.classList.toggle('on');p.appendChild(b)}));
 
 /* ---------- 기록 복사 ---------- */
 document.getElementById('copyBtn').onclick=async()=>{
@@ -365,8 +350,7 @@ document.getElementById('copyBtn').onclick=async()=>{
   document.querySelectorAll('section[data-sec]').forEach(s=>{const t=s.querySelector('textarea').value.trim(),g=tagSummary(s);out+=`■ ${s.dataset.sec}\n${[g,t].filter(Boolean).join('\n')||'-'}\n\n`});
   const must=[...chipBox.children].filter(c=>c.dataset.s=='1').map(c=>c.textContent);
   const skip=[...chipBox.children].filter(c=>c.dataset.s=='2').map(c=>c.textContent);
-  out+=`■ 가치 선택\n꼭 있어야 함: ${must.join(', ')||'-'}\n없어도 됨: ${skip.join(', ')||'-'}\n\n■ 컨셉 반응 (제시 순서: ${[...document.getElementById('concepts').children].map(c=>c.dataset.c).join('→')})\n`;
-  document.querySelectorAll('.concept').forEach(c=>{const on=[...c.querySelectorAll('.pick .on')].map(b=>b.textContent);out+=`${c.dataset.c}: ${on.join(', ')||'-'}\n`});
+  out+=`■ 가치 선택\n꼭 있어야 함: ${must.join(', ')||'-'}\n없어도 됨: ${skip.join(', ')||'-'}\n\n■ 컨셉 제시 순서: ${[...document.getElementById('concepts').children].map(c=>c.dataset.c).join('→')}\n`;
   try{await navigator.clipboard.writeText(out);alert('기록을 복사했습니다.')}catch(e){prompt('아래 내용을 복사하세요',out)}
 };
 
@@ -447,7 +431,7 @@ try{photos=JSON.parse(localStorage.getItem(PHOTO_KEY)||'[]')}catch(e){photos=[]}
 renderPhotos();
 
 /* ---------- 임시 저장 ---------- */
-const KEY='spectra-interview-draft-v2';
+const KEY='spectra-interview-draft-v3';
 function save(){try{localStorage.setItem(KEY,JSON.stringify({
   m:[pidEl.value,pdateEl.value,pipEl.value],
   t:[...document.querySelectorAll('textarea')].map(t=>t.value),
