@@ -119,6 +119,67 @@ body.print-mode .tg:not(:has(.tag.on)){display:none}
 body.print-mode .tagset:not(:has(.tag.on)){display:none}
 body.print-mode .print-text.empty{display:none}
 
+.meta select{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font:inherit;font-size:14px;background:#fff;flex:0 0 auto}
+.tg-label{font-size:13px;font-weight:700;color:var(--ink);margin:12px 0 6px}
+.tg-label em{font-style:normal;font-weight:400;color:var(--mute);font-size:12px;margin-left:6px}
+#keyline{margin-top:0;min-height:48px}
+.codes button{font:inherit;font-size:12px;border:1px solid var(--line);border-radius:6px;padding:5px 9px;background:#fff;color:var(--ink)}
+.codes button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.qbtn{margin:8px 0 0 30px;border:0;background:none;color:var(--blue);font-size:12px;font-weight:600;padding:2px 0}
+.quote{display:block;width:calc(100% - 30px);margin:6px 0 0 30px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:14px;background:#fffdf5}
+.quote[hidden]{display:none}
+
+/* ---------- 인터뷰 기록지 (PDF 전용) ---------- */
+#record{display:none}
+body.print-mode{background:#fff}
+body.print-mode .wrap{display:none!important}
+body.print-mode #record{display:block;width:718px;color:#0f172a;font-size:10.5px;line-height:1.5;transform-origin:top left}
+.r-top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #0f172a;padding-bottom:6px}
+.r-top h1{font-size:17px;margin:0;letter-spacing:-.02em}
+.r-top .r-id{font-size:17px;font-weight:800;color:var(--blue)}
+.r-sub{font-size:9px;color:var(--sub);letter-spacing:.06em;font-weight:700}
+.r-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid #cbd5e1;margin-bottom:8px}
+.r-meta div{padding:5px 6px 5px 0;font-size:9.5px}
+.r-meta b{display:block;font-size:8px;color:var(--mute);font-weight:600;letter-spacing:.04em}
+.r-key{border-left:4px solid var(--blue);background:var(--blue-soft);padding:7px 10px;margin:0 0 10px;font-size:12px;font-weight:700;color:var(--blue-deep)}
+.r-key small{display:block;font-size:8px;font-weight:600;color:var(--blue);letter-spacing:.06em;margin-bottom:1px}
+.r-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.r-sec{break-inside:avoid}
+.r-sec.full{grid-column:1/-1}
+.r-h{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;border-bottom:1px solid #cbd5e1;padding-bottom:3px;margin-bottom:5px}
+.r-h span{display:inline-flex;width:16px;height:16px;border-radius:4px;background:#0f172a;color:#fff;font-size:9px;align-items:center;justify-content:center}
+.r-h em{margin-left:auto;font-style:normal;font-weight:500;font-size:8.5px;color:var(--mute)}
+.r-qa{margin:0 0 5px}
+.r-q{color:var(--sub);font-size:9.5px}
+.r-a{font-weight:700}
+.r-a .r-lab{font-weight:500;color:var(--mute);font-size:9px;margin-right:2px}
+.r-none{color:#b6bfcc;font-weight:400}
+.r-quote{margin:2px 0 0;padding-left:7px;border-left:2px solid #f59e0b;font-style:italic;color:#334155}
+.r-memo{margin-top:4px;font-size:9px;color:var(--sub);background:#f8fafc;border-radius:4px;padding:4px 6px;white-space:pre-wrap}
+.r-memo b{color:var(--ink)}
+.r-flow{position:relative;margin:0 0 4px;padding-left:14px}
+.r-flow:before{content:"";position:absolute;left:4px;top:6px;bottom:6px;width:1.5px;background:#cbd5e1}
+.r-step{position:relative;margin:0 0 5px}
+.r-step:before{content:"";position:absolute;left:-13px;top:5px;width:7px;height:7px;border-radius:50%;background:#fff;border:1.5px solid var(--blue)}
+.r-photos{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:0 0 6px}
+.r-photos figure{margin:0}
+.r-photos .r-img{aspect-ratio:1/1;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.r-photos img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
+.r-photos figure.main .r-img{border:1.5px solid var(--blue)}
+.r-photos figcaption{font-size:8px;color:var(--sub);text-align:center;margin-top:1px}
+.r-nophoto{font-size:9px;color:#b6bfcc;margin-bottom:5px}
+.r-values{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin-bottom:5px}
+.r-values b{font-size:9px;color:var(--mute);font-weight:600}
+table.r-tbl{width:100%;border-collapse:collapse;font-size:9.5px;margin-bottom:5px}
+.r-tbl th,.r-tbl td{border-bottom:1px solid #e2e8f0;padding:3px 4px;text-align:center}
+.r-tbl th{font-size:8.5px;color:var(--mute);font-weight:600}
+.r-tbl td:first-child,.r-tbl th:first-child{text-align:left}
+.r-tbl .dot{color:var(--blue);font-size:11px}
+.r-tbl .no{color:#d5dbe3}
+.r-codes{display:flex;flex-wrap:wrap;gap:4px}
+.r-codes span{border:1px solid #0f172a;border-radius:3px;padding:0 5px;font-size:8.5px;font-weight:700}
+.r-foot{margin-top:10px;padding-top:5px;border-top:1px solid #cbd5e1;display:flex;justify-content:space-between;font-size:8px;color:var(--mute)}
+
 /* ---------- 한 장 출력 레이아웃 ---------- */
 body.print-mode{background:#fff;font-size:10px;line-height:1.45}
 body.print-mode .wrap{width:718px;max-width:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;align-items:start;transform-origin:top left}
@@ -178,6 +239,8 @@ body.print-mode footer{display:none}
     <input id="pid" placeholder="참여자 코드 (예: P03)">
     <input id="pdate" placeholder="날짜">
     <input id="pip" placeholder="좋아하는 아티스트·IP">
+    <input id="interviewer" class="host" placeholder="진행자">
+    <select id="method" class="host"><option>대면</option><option>온라인</option><option>전화</option></select>
     <label class="consent host"><input type="checkbox" id="consent"> 녹음·사진 사용 동의 받음</label>
   </div>
 </header>
@@ -265,21 +328,26 @@ body.print-mode footer{display:none}
 </section>
 
 <div class="card host wide">
-  <div class="sec-head"><span class="num">정리</span><h2>24시간 안에 태깅</h2></div>
+  <div class="sec-head"><span class="num">정리</span><h2>인터뷰 직후 정리</h2></div>
+  <p class="tg-label">핵심 한 줄 <em>기록지 맨 위에 들어갑니다</em></p>
+  <textarea id="keyline" placeholder="이 참여자에게서 가장 중요했던 한 가지"></textarea>
+  <p class="tg-label">분석 코드 <em>해당하는 것 누르기</em></p>
   <div class="codes"><span>MEMORY 기억 장면</span><span>TRIGGER 멈춤·촬영 유발</span><span>IDENTITY 아티스트다움</span><span>EMOTION 직접 말한 감정</span><span>ACTION 행동</span><span>SOCIAL 동행·팬 교류</span><span>FRICTION 불편·민망</span><span>RECOGNIZED 개인으로 인식됨</span></div>
-  <p class="probe"><b>판정</b> · 3명 이상 반복 = 패턴 후보 · 반대 사례는 예외로 따로 기록 · 연구자가 제시한 말보다 참여자가 먼저 꺼낸 말에 가중치.</p>
+  <p class="probe" style="margin-top:10px"><b>판정</b> · 3명 이상 반복 = 패턴 후보 · 반대 사례는 예외로 따로 기록 · 연구자가 제시한 말보다 참여자가 먼저 꺼낸 말에 가중치.</p>
 </div>
 
 <footer>생일카페 팬 인터뷰지 v3</footer>
 </div>
 
+<div id="record" aria-hidden="true"></div>
+
 <script>
 /* ---------- 참여자 모드 / 섞기 ---------- */
-const consentEl=document.getElementById('consent'),pidEl=document.getElementById('pid'),pdateEl=document.getElementById('pdate'),pipEl=document.getElementById('pip');
+const interviewerEl=document.getElementById('interviewer'),methodEl=document.getElementById('method'),keylineEl=document.getElementById('keyline'),consentEl=document.getElementById('consent'),pidEl=document.getElementById('pid'),pdateEl=document.getElementById('pdate'),pipEl=document.getElementById('pip');
 const modeBtn=document.getElementById('modeBtn');
 modeBtn.onclick=()=>{const on=document.body.classList.toggle('participant');modeBtn.setAttribute('aria-pressed',on);modeBtn.textContent=on?'진행자 화면으로':'참여자에게 보여주기';window.scrollTo(0,0)};
 document.getElementById('shuffleBtn').onclick=()=>{
-  const box=document.getElementById('concepts');const items=[...box.children];setTimeout(save,0);
+  const box=document.getElementById('concepts');const items=[...box.children];setTimeout(()=>save(true),0);
   for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}
   items.forEach(el=>box.appendChild(el));
 };
@@ -337,10 +405,17 @@ document.querySelectorAll('.qa-list').forEach(list=>{
         row.appendChild(b)});
       qa.appendChild(row);
     });
+    if(list.dataset.k!=='①'&&!item.host){
+      const qb=document.createElement('button');qb.type='button';qb.className='qbtn host';qb.textContent='＋ 한마디';
+      const qi2=document.createElement('input');qi2.className='quote host';qi2.placeholder='참여자가 한 말 그대로';qi2.hidden=true;
+      qb.onclick=()=>{qi2.hidden=false;qb.hidden=true;qi2.focus()};
+      qa.append(qb,qi2);
+    }
     list.appendChild(qa);
   });
 });
-function tagSummary(sec){return [...sec.querySelectorAll('.qa')].map(r=>{const on=[...r.querySelectorAll('.tag.on')].map(b=>b.textContent);return on.length?`${r.querySelector('.qt').textContent} → ${on.join(', ')}`:''}).filter(Boolean).join('\n')}
+function tagSummary(sec){return [...sec.querySelectorAll('.qa')].map(r=>{const on=[...r.querySelectorAll('.tag.on')].map(b=>b.textContent),q=(r.querySelector('.quote')?.value||'').trim();return on.length||q?`${r.querySelector('.qt').textContent} → ${on.join(', ')||'-'}${q?` “${q}”`:''}`:''}).filter(Boolean).join('\n')}
+document.querySelectorAll('.codes span').forEach(sp=>{const b=document.createElement('button');b.type='button';b.textContent=sp.textContent;b.onclick=()=>{b.classList.toggle('on');setTimeout(save,0)};sp.replaceWith(b)});
 
 
 /* ---------- 기록 복사 ---------- */
@@ -354,32 +429,89 @@ document.getElementById('copyBtn').onclick=async()=>{
   try{await navigator.clipboard.writeText(out);alert('기록을 복사했습니다.')}catch(e){prompt('아래 내용을 복사하세요',out)}
 };
 
-/* ---------- PDF 저장 (A4 한 장) ---------- */
-const PAGE_W=718, PAGE_H=1020; // A4 - 여백 10mm, 96dpi 기준
-const wrapEl=document.querySelector('.wrap');
-let printing=false, wasParticipant=false, oldTitle=document.title;
-function fillPrintText(){
-  document.querySelectorAll('textarea').forEach(t=>{
-    let d=t.nextElementSibling;
-    if(!d||!d.classList.contains('print-text')){d=document.createElement('div');d.className='print-text';t.after(d)}
-    d.textContent=t.value.trim();d.classList.toggle('empty',!t.value.trim());
-  });
-  const order=[...document.getElementById('concepts').children].map(c=>c.dataset.c).join(' → ');
-  document.getElementById('printHead').textContent=`참여자 ${pidEl.value||'____'}   ·   날짜 ${pdateEl.value||'____'}   ·   아티스트·IP ${pipEl.value||'____'}   ·   컨셉 제시 순서 ${order}   ·   동의 ${consentEl.checked?'✓':'—'}`;
+/* ---------- 인터뷰 기록지 (PDF) ---------- */
+const PAGE_H=1030; // A4 - 여백 10mm, 96dpi 기준
+const recEl=document.getElementById('record');
+const CNAME={A:'포토존 확장',B:'몰입형 공간 미디어',C:'반응형 캐릭터'};
+let printing=false, oldTitle=document.title, startTs=0, lastTs=0;
+const esc=v=>String(v).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const hm=t=>{const d=new Date(t);return `${pad(d.getHours())}:${pad(d.getMinutes())}`};
+function qaData(k){return [...document.querySelectorAll(`.qa-list[data-k="${k}"] .qa`)].map(el=>({
+  q:el.querySelector('.qt').textContent,
+  groups:[...el.querySelectorAll('.tg')].map(r=>({l:r.querySelector('.tg-q')?.textContent||'',on:[...r.querySelectorAll('.tag.on')].map(b=>b.textContent)})),
+  quote:(el.querySelector('.quote')?.value||'').trim()}))}
+const answered=d=>d.groups.some(g=>g.on.length)||!!d.quote;
+const ansHtml=d=>{const parts=d.groups.filter(g=>g.on.length).map(g=>(g.l?`<span class="r-lab">${esc(g.l)}</span>`:'')+esc(g.on.join(' · ')));return parts.length?parts.join('&nbsp;&nbsp;'):(d.quote?'':'<span class="r-none">응답 없음</span>')};
+const quoteHtml=t=>t?`<div class="r-quote">“${esc(t)}”</div>`:'';
+const qaHtml=(d,label)=>`<div class="r-qa"><div class="r-q">Q. ${esc(label||d.q)}</div><div class="r-a">${ansHtml(d)}</div>${quoteHtml(d.quote)}</div>`;
+const memoOf=k=>{const t=document.querySelector(`section[data-sec^="${k}"] textarea`)?.value.trim();return t?`<div class="r-memo"><b>메모</b> ${esc(t)}</div>`:''};
+function buildRecord(){
+  const all=['①','②','③','④','⑤','⑥'].flatMap(k=>qaData(k));
+  const total=all.length,done=all.filter(answered).length;
+  const w=qaData('①'),g1=w[0].groups[0].on,g2=w[1].groups;
+  const order=[...document.getElementById('concepts').children].map(c=>c.dataset.c);
+  const time=startTs?`${hm(startTs)}–${hm(lastTs||Date.now())} (${Math.max(1,Math.round(((lastTs||Date.now())-startTs)/60000))}분)`:'—';
+  const v=x=>x?esc(x):'<span class="r-none">—</span>';
+  // ② 흐름
+  const d2=qaData('②'),labels2=['입장 후 처음 본 것','가장 오래 머문 곳',"'오길 잘했다' 순간",'기대와 달랐던 점'];
+  const flow=d2.map((d,i)=>`<div class="r-step"><div class="r-q">${labels2[i]}</div><div class="r-a">${ansHtml(d)}</div>${quoteHtml(d.quote)}</div>`).join('');
+  // ③ 사진
+  const ph=photos.length?`<div class="r-photos">${photos.map((src,i)=>`<figure class="${i?'':'main'}"><div class="r-img"><img src="${src}" alt=""></div><figcaption>${i?'사진 '+(i+1):'★ 깊게 본 사진'}</figcaption></figure>`).join('')}</div>`:'<div class="r-nophoto">등록된 사진 없음</div>';
+  // ④
+  const d4=qaData('④');
+  const first=d4[3].groups[0].on[0];
+  // ⑤
+  const must=[...chipBox.children].filter(c=>c.dataset.s=='1').map(c=>c.textContent);
+  const skip=[...chipBox.children].filter(c=>c.dataset.s=='2').map(c=>c.textContent);
+  const d5=qaData('⑤');
+  // ⑥ 표
+  const d6=qaData('⑥'),cols=[[0,'먼저 가볼 것'],[2,'남기고 싶음'],[3,'한 번 하고 끝'],[4,'30초 안에'],[5,'부담·민망'],[6,'재방문 이유']];
+  const rows=order.map(c=>`<tr><td><b>${c}</b> ${CNAME[c]}</td>${cols.map(([i])=>d6[i].groups[0].on.includes(c)?'<td class="dot">●</td>':'<td class="no">·</td>').join('')}</tr>`).join('');
+  const none6=cols.filter(([i])=>d6[i].groups[0].on.includes('없음')).map(([,h])=>h);
+  const q6=d6.filter((d,i)=>i!==1&&d.quote).map(d=>`<div class="r-quote"><span class="r-lab" style="font-style:normal">${esc(d.q)}</span> “${esc(d.quote)}”</div>`).join('');
+  const codes=[...document.querySelectorAll('.codes button.on')].map(b=>b.textContent.split(' ')[0]);
+  const key=keylineEl.value.trim();
+  const now=new Date();
+  recEl.innerHTML=`
+  <div class="r-top"><div><div class="r-sub">생일카페 경험 · 사용자 심화 인터뷰</div><h1>생일카페 팬 인터뷰 기록</h1></div><div class="r-id">${v(pidEl.value)}</div></div>
+  <div class="r-meta">
+    <div><b>일자</b>${v(pdateEl.value)}</div>
+    <div><b>시간</b>${time}</div>
+    <div><b>진행자 · 방식</b>${v(interviewerEl.value)} · ${esc(methodEl.value)}</div>
+    <div><b>녹음·사진 사용 동의</b>${consentEl.checked?'받음 ✓':'<span class="r-none">미확인</span>'}</div>
+    <div><b>좋아하는 IP</b>${v([g1.join(' · '),pipEl.value].filter(Boolean).join(' / '))}</div>
+    <div><b>최근 방문</b>${v(g2[0].on[0])}</div>
+    <div><b>동행</b>${v(g2[1].on[0])}</div>
+    <div><b>컨셉 제시 순서</b>${order.join(' → ')}</div>
+  </div>
+  ${key?`<div class="r-key"><small>핵심 한 줄</small>${esc(key)}</div>`:''}
+  <div class="r-grid">
+    <div class="r-sec"><div class="r-h"><span>1</span>최근 방문 흐름</div><div class="r-flow">${flow}</div>${memoOf('②')}</div>
+    <div class="r-sec"><div class="r-h"><span>3</span>'나'로 연결된 순간</div>
+      ${qaHtml(d4[0])}${qaHtml(d4[1])}${qaHtml(d4[2])}
+      ${first?`<div class="r-q">※ 진행자 판단: ${first==='먼저 꺼냄'?'②·③에서 참여자가 먼저 언급':'④에서 처음 언급'}</div>`:''}${memoOf('④')}</div>
+    <div class="r-sec"><div class="r-h"><span>2</span>사진 회고<em>참여자 제공 사진 ${photos.length}장</em></div>${ph}
+      ${qaData('③').map(d=>qaHtml(d)).join('')}${memoOf('③')}</div>
+    <div class="r-sec"><div class="r-h"><span>4</span>좋은 생일카페</div>
+      <div class="r-values"><b>꼭 있어야</b><div class="r-a">${must.length?esc(must.join(' · ')):'<span class="r-none">선택 없음</span>'}</div><b>없어도 됨</b><div class="r-a">${skip.length?esc(skip.join(' · ')):'<span class="r-none">선택 없음</span>'}</div></div>
+      ${qaHtml(d5[0],'다음 생일카페에서 딱 하나 달라진다면?')}${memoOf('⑤')}</div>
+    <div class="r-sec full"><div class="r-h"><span>5</span>세 가지 방향 반응<em>A·B·C는 같은 형식의 애니메이션으로 제시</em></div>
+      <table class="r-tbl"><thead><tr><th>컨셉</th>${cols.map(([,h])=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>
+      ${none6.length?`<div class="r-q">'없음' 응답: ${esc(none6.join(' · '))}</div>`:''}
+      ${qaHtml(d6[1],'그것을 고른 이유')}${q6}${memoOf('⑥')}</div>
+  </div>
+  ${codes.length||memoOf('①')?`<div class="r-sec" style="margin-top:8px"><div class="r-h"><span>+</span>분석 코드 · 기타 메모</div>${codes.length?`<div class="r-codes">${codes.map(c=>`<span>${c}</span>`).join('')}</div>`:''}${memoOf('①')}</div>`:''}
+  <div class="r-foot"><span>질문 ${total}개 중 ${done}개 응답 · 사진 ${photos.length}장 · 인터뷰지 v3</span><span>기록 생성 ${now.getFullYear()}.${now.getMonth()+1}.${now.getDate()} ${hm(now)}</span></div>`;
 }
 function enterPrint(){
   if(printing)return; printing=true;
-  fillPrintText();
-  wasParticipant=document.body.classList.contains('participant');
-  document.body.classList.remove('participant');
+  buildRecord();
   document.body.classList.add('print-mode');
-  paused=true; renderAll(5); // 정지 장면: 사람이 서서 반응을 보는 순간
-  wrapEl.style.zoom=1;
-  const h=wrapEl.scrollHeight;
-  let z=Math.min(1,PAGE_H/h,PAGE_W/wrapEl.scrollWidth);
-  wrapEl.style.zoom=z.toFixed(3);
-  // 줌에 따라 줄바꿈이 바뀌므로 실제 높이를 다시 재서 한 장에 들어갈 때까지 줄인다
-  for(let i=0;i<20&&wrapEl.getBoundingClientRect().height>PAGE_H;i++){z*=0.97;wrapEl.style.zoom=z.toFixed(3)}
+  recEl.style.zoom=1;
+  let z=Math.min(1,PAGE_H/recEl.scrollHeight);
+  recEl.style.zoom=z.toFixed(3);
+  for(let i=0;i<25&&recEl.getBoundingClientRect().height>PAGE_H;i++){z*=0.97;recEl.style.zoom=z.toFixed(3)}
   oldTitle=document.title;
   const safe=v=>v.replace(/[\\/:*?"<>|\s]+/g,'-');
   document.title=['생카인터뷰',safe(pidEl.value||'참여자'),safe(pdateEl.value||'')].filter(Boolean).join('_');
@@ -387,16 +519,15 @@ function enterPrint(){
 function exitPrint(){
   if(!printing)return; printing=false;
   document.body.classList.remove('print-mode');
-  wrapEl.style.zoom='';
-  if(wasParticipant)document.body.classList.add('participant');
+  recEl.style.zoom='';
   document.title=oldTitle;
-  paused=false; requestAnimationFrame(frame);
 }
 window.addEventListener('beforeprint',enterPrint);
 window.addEventListener('afterprint',exitPrint);
 document.getElementById('pdfBtn').onclick=()=>{enterPrint();
-  const z=parseFloat(wrapEl.style.zoom)||1;
-  if(z<0.6&&!confirm(`메모가 길어서 한 장에 맞추면 글자가 ${Math.round(z*100)}% 크기로 작아집니다. 그래도 저장할까요?`)){exitPrint();return}setTimeout(()=>{window.print();setTimeout(exitPrint,500)},60)};
+  const z=parseFloat(recEl.style.zoom)||1;
+  if(z<0.7&&!confirm(`적은 내용이 많아서 한 장에 맞추면 글자가 ${Math.round(z*100)}% 크기로 작아집니다. 그래도 저장할까요?`)){exitPrint();return}
+  setTimeout(()=>{window.print();setTimeout(exitPrint,500)},80)};
 
 /* ---------- ③ 참여자 사진 ---------- */
 const PHOTO_KEY='spectra-interview-photos-v1';
@@ -431,15 +562,19 @@ try{photos=JSON.parse(localStorage.getItem(PHOTO_KEY)||'[]')}catch(e){photos=[]}
 renderPhotos();
 
 /* ---------- 임시 저장 ---------- */
-const KEY='spectra-interview-draft-v3';
-function save(){try{localStorage.setItem(KEY,JSON.stringify({
+const KEY='spectra-interview-draft-v4';
+function save(quiet){if(quiet!==true){startTs=startTs||Date.now();lastTs=Date.now()}try{localStorage.setItem(KEY,JSON.stringify({
   m:[pidEl.value,pdateEl.value,pipEl.value],
   t:[...document.querySelectorAll('textarea')].map(t=>t.value),
   chips:[...chipBox.children].map(c=>c.dataset.s),
   picks:[...document.querySelectorAll('.concept')].map(c=>({c:c.dataset.c,on:[...c.querySelectorAll('.pick button')].map(b=>b.classList.contains('on'))})),
   order:[...document.getElementById('concepts').children].map(c=>c.dataset.c),
   tags:[...document.querySelectorAll('.tag')].map(b=>b.classList.contains('on')?1:0),
-  consent:consentEl.checked
+  consent:consentEl.checked,
+  quotes:[...document.querySelectorAll('.quote')].map(q=>q.value),
+  codes:[...document.querySelectorAll('.codes button')].map(b=>b.classList.contains('on')?1:0),
+  iv:[interviewerEl.value,methodEl.value],
+  ts:[startTs,lastTs]
 }))}catch(e){}}
 function restore(){try{
   const d=JSON.parse(localStorage.getItem(KEY)||'null');if(!d)return;
@@ -450,6 +585,10 @@ function restore(){try{
   (d.order||[]).forEach(k=>{const el=box.querySelector(`[data-c="${k}"]`);el&&box.appendChild(el)});
   (d.tags||[]).forEach((v,i)=>{const b=document.querySelectorAll('.tag')[i];b&&b.classList.toggle('on',!!v)});
   consentEl.checked=!!d.consent;
+  (d.quotes||[]).forEach((v,i)=>{const q=document.querySelectorAll('.quote')[i];if(q&&v){q.value=v;q.hidden=false;q.previousElementSibling.hidden=true}});
+  (d.codes||[]).forEach((v,i)=>{const b=document.querySelectorAll('.codes button')[i];b&&b.classList.toggle('on',!!v)});
+  if(d.iv){interviewerEl.value=d.iv[0]||'';methodEl.value=d.iv[1]||'대면'}
+  if(d.ts){[startTs,lastTs]=d.ts}
   (d.picks||[]).forEach(p=>{const c=box.querySelector(`[data-c="${p.c}"]`);c&&c.querySelectorAll('.pick button').forEach((b,i)=>b.classList.toggle('on',!!p.on[i]))});
 }catch(e){}}
 restore();
@@ -461,12 +600,16 @@ document.getElementById('resetBtn').onclick=()=>{
   if(!confirm('지금 기록을 지우고 새 참여자로 시작할까요? (먼저 PDF 저장이나 기록 복사를 해 두세요)'))return;
   try{localStorage.removeItem(KEY);localStorage.removeItem(PHOTO_KEY)}catch(e){}
   photos=[];renderPhotos();
-  document.querySelectorAll('textarea,.meta input').forEach(i=>i.value='');
+  document.querySelectorAll('textarea,.meta input,.quote').forEach(i=>i.value='');
+  document.querySelectorAll('.quote').forEach(q=>{q.hidden=true;q.previousElementSibling.hidden=false});
+  document.querySelectorAll('.codes button.on').forEach(b=>b.classList.remove('on'));
+  methodEl.value='대면';startTs=0;lastTs=0;
   [...chipBox.children].forEach(c=>{c.dataset.s='0';c.className='chip'});
   document.querySelectorAll('.pick button.on,.tag.on').forEach(b=>b.classList.remove('on'));
   consentEl.checked=false;
   const n=new Date();pdateEl.value=`${n.getFullYear()}.${n.getMonth()+1}.${n.getDate()}`;
   document.getElementById('shuffleBtn').click();
+  try{localStorage.removeItem(KEY)}catch(e){}
   window.scrollTo(0,0);
 };
 
