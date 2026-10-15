@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SPECTRA 팬 인터뷰지</title>
+<title>생일카페 팬 인터뷰지</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 :root{
@@ -78,6 +78,31 @@ body.print-mode .photo img{border-radius:4px}
 body.print-mode .photo figcaption{font-size:7.5px;margin-top:1px}
 body.print-mode .photo-del,body.print-mode .photo-add{display:none}
 body.print-mode .photos:not(:has(.photo)){display:none}
+.consent{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--sub);flex:1 1 100%}
+.consent input{width:16px;height:16px;accent-color:var(--blue)}
+textarea{min-height:56px}
+.tagset{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+.tg{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 8px}
+.tg-q{font-size:12px;font-weight:700;color:var(--sub);flex:1 1 100%}
+.tg-q em{font-style:normal;font-weight:400;color:var(--mute);margin-left:4px}
+.tag{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:13px;color:var(--ink);min-height:36px}
+.tag.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+body.participant .toolbar .btn:not(#modeBtn){display:none}
+body.participant #modeBtn{background:#f59e0b;border-color:#f59e0b;color:#fff}
+body.participant .meta{display:none}
+body.participant textarea,body.participant .photo-del{display:none}
+body.print-mode .consent{display:none}
+body.print-mode .tagset{margin-top:4px;padding-top:3px}
+body.print-mode .tg{gap:3px;margin:0 0 2px;flex-wrap:wrap}
+body.print-mode .tg-q{flex:none;font-size:8.5px}
+body.print-mode .tg-q em{display:none}
+body.print-mode .tg-q::after{content:":"}
+body.print-mode .tag{font-size:8.5px;padding:0 6px;min-height:0;border-radius:4px}
+body.print-mode .tag:not(.on){display:none}
+body.print-mode .tg:not(:has(.tag.on)){display:none}
+body.print-mode .tagset:not(:has(.tag.on)){display:none}
+body.print-mode .print-text.empty{display:none}
+
 /* ---------- 한 장 출력 레이아웃 ---------- */
 body.print-mode{background:#fff;font-size:10px;line-height:1.45}
 body.print-mode .wrap{width:718px;max-width:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;align-items:start;transform-origin:top left}
@@ -130,18 +155,19 @@ body.print-mode footer{display:none}
 <div class="wrap">
 <div class="print-head" id="printHead"></div>
 <header>
-  <div class="eyebrow">SPECTRA · 사용자 심화 조사</div>
+  <div class="eyebrow">생일카페 경험 인터뷰</div>
   <h1>생일카페 팬 인터뷰지</h1>
-  <p class="lead">팬에게 기억에 남는 생일카페 경험이 무엇인지, 그리고 그 안에서 <b>'나를 알아봐 주는 느낌'</b>이 어떤 자리를 차지하는지 확인한다.</p>
+  <p class="lead">최근에 다녀온 생일카페 이야기를 편하게 들려주세요. 정답은 없고, 기억나는 대로 말해 주시면 됩니다.</p>
   <div class="meta">
     <input id="pid" placeholder="참여자 코드 (예: P03)">
     <input id="pdate" placeholder="날짜">
     <input id="pip" placeholder="좋아하는 아티스트·IP">
+    <label class="consent host"><input type="checkbox" id="consent"> 녹음·사진 사용 동의 받음</label>
   </div>
 </header>
 
 <div class="toolbar">
-  <button class="btn" id="modeBtn" aria-pressed="false">참여자 화면 모드</button>
+  <button class="btn" id="modeBtn" aria-pressed="false">참여자에게 보여주기</button>
   <button class="btn" id="shuffleBtn">컨셉 순서 섞기</button>
   <button class="btn" id="resetBtn">새 참여자</button>
   <button class="btn" id="copyBtn">기록 복사</button>
@@ -156,11 +182,12 @@ body.print-mode footer{display:none}
     <li>가장 최근에 간 생일카페는 언제였고, 누구와 갔나요?</li>
   </ol>
   <p class="note host"><b>사전 스크리너로 확인:</b> 최근 3개월 내 방문 여부, 1년간 방문 횟수.</p>
-  <textarea placeholder="메모"></textarea>
+  <div class="tagset host"></div>
+  <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <section class="card" data-sec="② 방문 복원">
-  <div class="sec-head"><span class="num">②</span><h2>최근 방문 복원</h2><span class="time">6분</span></div>
+  <div class="sec-head"><span class="num">②</span><h2>최근 방문 복원</h2><span class="time">5분</span></div>
   <div class="prompt">"가장 최근에 갔던 생일카페를, 가기 전부터 나온 순간까지 순서대로 이야기해 주세요."</div>
   <ol class="q">
     <li>들어가서 가장 먼저 본 것은 무엇이었나요?</li>
@@ -169,11 +196,12 @@ body.print-mode footer{display:none}
     <li>기대와 달랐던 순간이 있었나요?</li>
   </ol>
   <p class="probe"><b>꼬리 질문</b> · 그 직전에 무엇을 하고 있었나요? · 왜 거기서 멈췄나요?</p>
-  <textarea placeholder="메모"></textarea>
+  <div class="tagset host"></div>
+  <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <section class="card" data-sec="③ 사진 1장">
-  <div class="sec-head"><span class="num">③</span><h2>사진 1장 깊게</h2><span class="time">6분</span></div>
+  <div class="sec-head"><span class="num">③</span><h2>사진 1장 깊게</h2><span class="time">5분</span></div>
   <div class="prompt">"그날을 떠올릴 때 가장 먼저 생각나는 사진을 1장 골라 주세요."</div>
   <div class="photos" id="photos">
     <label class="photo-add" id="photoAdd">
@@ -188,18 +216,20 @@ body.print-mode footer{display:none}
     <li>누구에게 공유했나요? 왜 이 장면이었나요?</li>
   </ol>
   <p class="probe"><b>나머지 사진</b> · "이건 왜 찍었나요?"만 짧게.</p>
-  <textarea placeholder="메모"></textarea>
+  <div class="tagset host"></div>
+  <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <section class="card" data-sec="④ 알아봐 준 순간">
-  <div class="sec-head"><span class="num">④</span><h2>'나'로 연결된 순간</h2><span class="time">4분</span></div>
-  <p class="goal host">SPECTRA 핵심 가설을 데모 없이 확인하는 구간. 참여자가 먼저 꺼내는지가 중요하다.</p>
+  <div class="sec-head"><span class="num">④</span><h2>'나'로 연결된 순간</h2><span class="time">3분</span></div>
+  <p class="goal host">참여자가 이 감각을 ②·③에서 먼저 꺼냈는지 같이 표시한다.</p>
   <ol class="q">
     <li>생일카페나 팬 활동에서 '나를 위한 거다', '나를 기억해 준다'고 느낀 순간이 있었나요?</li>
     <li>이름·메시지처럼 나에게 맞춰진 특전이나 이벤트를 받아본 적 있나요? 그때 무엇을 했나요?</li>
     <li>반대로 '그냥 수많은 방문객 중 한 명'처럼 느껴진 순간은요?</li>
   </ol>
-  <textarea placeholder="메모"></textarea>
+  <div class="tagset host"></div>
+  <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <section class="card wide" data-sec="⑤ 좋은 경험">
@@ -210,11 +240,12 @@ body.print-mode footer{display:none}
   <ol class="q">
     <li>다음 생일카페에서 딱 하나만 달라질 수 있다면 무엇이면 좋겠나요?</li>
   </ol>
-  <textarea placeholder="메모"></textarea>
+  <div class="tagset host"></div>
+  <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <section class="card wide" data-sec="⑥ 컨셉 테스트">
-  <div class="sec-head"><span class="num">⑥</span><h2>세 가지 방향 보기</h2><span class="time">7분</span></div>
+  <div class="sec-head"><span class="num">⑥</span><h2>세 가지 방향 보기</h2><span class="time">6분</span></div>
   <p class="goal">아래 세 장면을 같이 봐 주세요. 실제 생일카페 벽 한쪽에 설치된다고 생각하면 됩니다.</p>
   <div class="concepts" id="concepts">
     <div class="concept" data-c="A">
@@ -222,50 +253,50 @@ body.print-mode footer{display:none}
       <div class="body"><span class="letter">A</span>
         <p>기존 포토존에 겹겹의 레이어·오브제·조명을 더해 사진이 입체적으로 보이게 한다.</p>
         <div class="state host" id="stA"></div>
-        <div class="pick"></div></div>
+        <div class="pick host"></div></div>
     </div>
     <div class="concept" data-c="B">
       <svg viewBox="0 0 300 220" id="svgB"></svg>
       <div class="body"><span class="letter">B</span>
         <p>영상·빛·움직임·소리로 벽 전체가 바뀌어 아티스트의 세계 안에 들어온 듯한 공간이 된다.</p>
         <div class="state host" id="stB"></div>
-        <div class="pick"></div></div>
+        <div class="pick host"></div></div>
     </div>
     <div class="concept" data-c="C">
       <svg viewBox="0 0 300 220" id="svgC"></svg>
       <div class="body"><span class="letter">C</span>
         <p>화면 속 캐릭터가 다가온 사람을 알아보고 눈을 맞추며, 손을 들면 하이파이브로 반응한다.</p>
         <div class="state host" id="stC"></div>
-        <div class="pick"></div></div>
+        <div class="pick host"></div></div>
     </div>
   </div>
   <ol class="q" style="margin-top:16px">
     <li>생일카페에 실제로 있다면 가장 먼저 가볼 것은? 왜요?</li>
-    <li>그게 '새로워서'인가요, '좋아하는 대상과 더 가깝게 느껴져서'인가요?</li>
+    <li>왜 그걸 골랐나요?</li>
     <li>사진·영상으로 남기고 싶은 것은?</li>
     <li>한 번 해보고 끝날 것 같은 것은?</li>
     <li>뒤에 사람이 줄 서 있다면, 30초 안에 해볼 것 같은 것은? 민망하거나 부담스러운 것은?</li>
     <li>다음 생일카페에 이게 있다면, 그것 때문에 한 번 더 갈 것 같은 것은?</li>
   </ol>
-  <p class="note host"><b>내부 메모:</b> C가 현재 SPECTRA 데모 방향이다. 참여자에게 말하지 않는다. 참여자마다 '컨셉 순서 섞기'로 제시 순서를 바꾼다.</p>
-  <textarea placeholder="메모"></textarea>
+  <p class="note host"><b>진행 메모:</b> 세 안을 같은 말투·같은 길이로 소개한다. 참여자마다 '컨셉 순서 섞기'로 순서를 바꾼다.</p>
+  <div class="tagset host"></div>
+  <textarea placeholder="추가 메모 (선택)"></textarea>
 </section>
 
 <div class="card host wide">
   <div class="sec-head"><span class="num">정리</span><h2>24시간 안에 태깅</h2></div>
   <div class="codes"><span>MEMORY 기억 장면</span><span>TRIGGER 멈춤·촬영 유발</span><span>IDENTITY 아티스트다움</span><span>EMOTION 직접 말한 감정</span><span>ACTION 행동</span><span>SOCIAL 동행·팬 교류</span><span>FRICTION 불편·민망</span><span>RECOGNIZED 개인으로 인식됨</span></div>
   <p class="probe"><b>판정</b> · 3명 이상 반복 = 패턴 후보 · 반대 사례는 예외로 따로 기록 · 연구자가 제시한 말보다 참여자가 먼저 꺼낸 말에 가중치.</p>
-  <p class="probe"><b>C 유지 근거</b> · ④에서 '알아봐 주는 느낌'이 자발적으로 나오고, ⑥에서 C를 고른 이유가 새로움보다 관계감일 때.</p>
 </div>
 
-<footer>SPECTRA · 팬 인터뷰지 v2</footer>
+<footer>생일카페 팬 인터뷰지 v3</footer>
 </div>
 
 <script>
 /* ---------- 참여자 모드 / 섞기 ---------- */
-const pidEl=document.getElementById('pid'),pdateEl=document.getElementById('pdate'),pipEl=document.getElementById('pip');
+const consentEl=document.getElementById('consent'),pidEl=document.getElementById('pid'),pdateEl=document.getElementById('pdate'),pipEl=document.getElementById('pip');
 const modeBtn=document.getElementById('modeBtn');
-modeBtn.onclick=()=>{const on=document.body.classList.toggle('participant');modeBtn.setAttribute('aria-pressed',on)};
+modeBtn.onclick=()=>{const on=document.body.classList.toggle('participant');modeBtn.setAttribute('aria-pressed',on);modeBtn.textContent=on?'진행자 화면으로':'참여자에게 보여주기';window.scrollTo(0,0)};
 document.getElementById('shuffleBtn').onclick=()=>{
   const box=document.getElementById('concepts');const items=[...box.children];setTimeout(save,0);
   for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}
@@ -278,14 +309,60 @@ const chipBox=document.getElementById('valueChips');
 values.forEach(v=>{const b=document.createElement('button');b.className='chip';b.textContent=v;b.dataset.s='0';
   b.onclick=()=>{const s=(+b.dataset.s+1)%3;b.dataset.s=s;b.className='chip'+(s==1?' must':s==2?' skip':'')};chipBox.appendChild(b)});
 
+/* ---------- 답변 태그 ---------- */
+const TAGS={
+ '①':[
+  {q:'좋아하는 분야',o:['K-POP','애니','웹툰','게임','캐릭터','배우·기타']},
+  {q:'최근 방문',s:1,o:['1개월 내','3개월 내','그 이전']},
+  {q:'동행',s:1,o:['혼자','친구 1명','여러 명']}],
+ '②':[
+  {q:'가장 먼저 본 것',o:['대형 사진·배너','영상 화면','장식·조명','포토존','특전 줄','굿즈·소품','메뉴·음료']},
+  {q:'오래 머문 곳',o:['포토존','사진·배너 벽','영상 화면','특전·굿즈','좌석','메시지 보드']},
+  {q:"'오길 잘했다' 순간",o:['최애 분위기를 느낄 때','사진이 잘 나왔을 때','특전을 받을 때','다른 팬과 교류','영상·음악','특별히 없음']},
+  {q:'기대와 달랐던 점',o:['대기·혼잡','공간이 좁음','생각보다 평범','특전 품절','사진이 기대 이하','없음']}],
+ '③':[
+  {q:'찍은 이유',o:['기록','공유하려고','예뻐서','최애다워서','인증']},
+  {q:'가장 중요한 요소',o:['최애 사진','색감·조명','소품·오브제','문구·메시지','크기·스케일','함께 간 사람']},
+  {q:'아티스트다움',s:1,o:['아주 그렇다','조금','아니다']},
+  {q:'공유',o:['SNS 게시','친구에게','팬 커뮤니티','안 함']}],
+ '④':[
+  {q:"'나를 위한 것' 경험",s:1,o:['있음','없음']},
+  {q:'어떤 경험',o:['이름·메시지 특전','특전 당첨','주최자·스태프 응대','손편지·포토카드','팬싸·영통','기타']},
+  {q:'그때 한 행동',o:['사진 찍음','SNS 공유','보관함','친구에게 자랑','없음']},
+  {q:"'여러 명 중 하나' 느낌",o:['줄·대기','똑같은 특전','빨리 비켜야 함','없음']},
+  {q:'먼저 꺼냈나',s:1,h:'진행자 판단',o:['②·③에서 먼저 언급','④에서 처음']}],
+ '⑤':[
+  {q:'딱 하나 달라진다면',o:['공간 연출','체험 요소','특전·굿즈','덜 붐볐으면','세계관 표현','나에게 맞춘 것']}],
+ '⑥':[
+  {q:'가장 먼저 가볼 것',s:1,o:['A','B','C']},
+  {q:'고른 이유',h:'답을 듣고 분류',o:['새로워서','최애와 가까운 느낌','사진·영상 남기기','재미있어서','아티스트다워서','부담 없어서']},
+  {q:'30초 안에 해볼 것',o:['A','B','C']},
+  {q:'다시 갈 이유가 될 것',o:['A','B','C','없음']}]
+};
+document.querySelectorAll('section[data-sec]').forEach(sec=>{
+  const key=sec.dataset.sec[0],box=sec.querySelector('.tagset');
+  (TAGS[key]||[]).forEach(g=>{
+    const row=document.createElement('div');row.className='tg';
+    const q=document.createElement('span');q.className='tg-q';q.textContent=g.q;
+    if(g.s||g.h){const em=document.createElement('em');em.textContent=[g.s?'하나만':'',g.h||''].filter(Boolean).join(' · ');q.appendChild(em)}
+    row.appendChild(q);
+    g.o.forEach(o=>{const b=document.createElement('button');b.type='button';b.className='tag';b.textContent=o;
+      b.onclick=()=>{if(g.s&&!b.classList.contains('on'))row.querySelectorAll('.tag.on').forEach(x=>x.classList.remove('on'));b.classList.toggle('on');setTimeout(save,0)};
+      row.appendChild(b)});
+    box.appendChild(row);
+  });
+});
+function tagSummary(sec){return [...sec.querySelectorAll('.tg')].map(r=>{const on=[...r.querySelectorAll('.tag.on')].map(b=>b.textContent);return on.length?`${r.querySelector('.tg-q').firstChild.textContent}: ${on.join(', ')}`:''}).filter(Boolean).join('\n')}
+
 /* ---------- 컨셉별 반응 기록 ---------- */
 const tags=['먼저 가볼 것','남기고 싶음','한 번 끝','부담됨','재방문'];
 document.querySelectorAll('.concept .pick').forEach(p=>tags.forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>b.classList.toggle('on');p.appendChild(b)}));
 
 /* ---------- 기록 복사 ---------- */
 document.getElementById('copyBtn').onclick=async()=>{
-  let out=`[SPECTRA 팬 인터뷰] ${pidEl.value} · ${pdateEl.value} · ${pipEl.value}\n\n`;
-  document.querySelectorAll('section[data-sec]').forEach(s=>{const t=s.querySelector('textarea').value.trim();out+=`■ ${s.dataset.sec}\n${t||'-'}\n\n`});
+  let out=`[생일카페 팬 인터뷰] ${pidEl.value} · ${pdateEl.value} · ${pipEl.value}\n\n`;
+  out+=`동의: ${consentEl.checked?'받음':'미확인'}\n\n`;
+  document.querySelectorAll('section[data-sec]').forEach(s=>{const t=s.querySelector('textarea').value.trim(),g=tagSummary(s);out+=`■ ${s.dataset.sec}\n${[g,t].filter(Boolean).join('\n')||'-'}\n\n`});
   const must=[...chipBox.children].filter(c=>c.dataset.s=='1').map(c=>c.textContent);
   const skip=[...chipBox.children].filter(c=>c.dataset.s=='2').map(c=>c.textContent);
   out+=`■ 가치 선택\n꼭 있어야 함: ${must.join(', ')||'-'}\n없어도 됨: ${skip.join(', ')||'-'}\n\n■ 컨셉 반응 (제시 순서: ${[...document.getElementById('concepts').children].map(c=>c.dataset.c).join('→')})\n`;
@@ -301,10 +378,10 @@ function fillPrintText(){
   document.querySelectorAll('textarea').forEach(t=>{
     let d=t.nextElementSibling;
     if(!d||!d.classList.contains('print-text')){d=document.createElement('div');d.className='print-text';t.after(d)}
-    d.textContent=t.value.trim()||' ';
+    d.textContent=t.value.trim();d.classList.toggle('empty',!t.value.trim());
   });
   const order=[...document.getElementById('concepts').children].map(c=>c.dataset.c).join(' → ');
-  document.getElementById('printHead').textContent=`참여자 ${pidEl.value||'____'}   ·   날짜 ${pdateEl.value||'____'}   ·   아티스트·IP ${pipEl.value||'____'}   ·   컨셉 제시 순서 ${order}`;
+  document.getElementById('printHead').textContent=`참여자 ${pidEl.value||'____'}   ·   날짜 ${pdateEl.value||'____'}   ·   아티스트·IP ${pipEl.value||'____'}   ·   컨셉 제시 순서 ${order}   ·   동의 ${consentEl.checked?'✓':'—'}`;
 }
 function enterPrint(){
   if(printing)return; printing=true;
@@ -321,7 +398,7 @@ function enterPrint(){
   for(let i=0;i<20&&wrapEl.getBoundingClientRect().height>PAGE_H;i++){z*=0.97;wrapEl.style.zoom=z.toFixed(3)}
   oldTitle=document.title;
   const safe=v=>v.replace(/[\\/:*?"<>|\s]+/g,'-');
-  document.title=['SPECTRA_팬인터뷰',safe(pidEl.value||'참여자'),safe(pdateEl.value||'')].filter(Boolean).join('_');
+  document.title=['생카인터뷰',safe(pidEl.value||'참여자'),safe(pdateEl.value||'')].filter(Boolean).join('_');
 }
 function exitPrint(){
   if(!printing)return; printing=false;
@@ -376,7 +453,9 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify({
   t:[...document.querySelectorAll('textarea')].map(t=>t.value),
   chips:[...chipBox.children].map(c=>c.dataset.s),
   picks:[...document.querySelectorAll('.concept')].map(c=>({c:c.dataset.c,on:[...c.querySelectorAll('.pick button')].map(b=>b.classList.contains('on'))})),
-  order:[...document.getElementById('concepts').children].map(c=>c.dataset.c)
+  order:[...document.getElementById('concepts').children].map(c=>c.dataset.c),
+  tags:[...document.querySelectorAll('.tag')].map(b=>b.classList.contains('on')?1:0),
+  consent:consentEl.checked
 }))}catch(e){}}
 function restore(){try{
   const d=JSON.parse(localStorage.getItem(KEY)||'null');if(!d)return;
@@ -385,11 +464,14 @@ function restore(){try{
   (d.chips||[]).forEach((v,i)=>{const c=chipBox.children[i];if(c){c.dataset.s=v;c.className='chip'+(v=='1'?' must':v=='2'?' skip':'')}});
   const box=document.getElementById('concepts');
   (d.order||[]).forEach(k=>{const el=box.querySelector(`[data-c="${k}"]`);el&&box.appendChild(el)});
+  (d.tags||[]).forEach((v,i)=>{const b=document.querySelectorAll('.tag')[i];b&&b.classList.toggle('on',!!v)});
+  consentEl.checked=!!d.consent;
   (d.picks||[]).forEach(p=>{const c=box.querySelector(`[data-c="${p.c}"]`);c&&c.querySelectorAll('.pick button').forEach((b,i)=>b.classList.toggle('on',!!p.on[i]))});
 }catch(e){}}
 restore();
 if(!pdateEl.value){const n=new Date();pdateEl.value=`${n.getFullYear()}.${n.getMonth()+1}.${n.getDate()}`}
 document.addEventListener('input',save);
+document.addEventListener('change',save);
 document.addEventListener('click',e=>{if(e.target.closest('.chip,.pick button'))setTimeout(save,0)});
 document.getElementById('resetBtn').onclick=()=>{
   if(!confirm('지금 기록을 지우고 새 참여자로 시작할까요? (먼저 PDF 저장이나 기록 복사를 해 두세요)'))return;
@@ -397,7 +479,8 @@ document.getElementById('resetBtn').onclick=()=>{
   photos=[];renderPhotos();
   document.querySelectorAll('textarea,.meta input').forEach(i=>i.value='');
   [...chipBox.children].forEach(c=>{c.dataset.s='0';c.className='chip'});
-  document.querySelectorAll('.pick button.on').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.pick button.on,.tag.on').forEach(b=>b.classList.remove('on'));
+  consentEl.checked=false;
   const n=new Date();pdateEl.value=`${n.getFullYear()}.${n.getMonth()+1}.${n.getDate()}`;
   document.getElementById('shuffleBtn').click();
   window.scrollTo(0,0);
