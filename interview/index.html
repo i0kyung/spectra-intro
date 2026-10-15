@@ -63,6 +63,22 @@ footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
 .print-text{display:none;white-space:pre-wrap;word-break:break-all;border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin-top:8px;min-height:30px;background:#fbfcfe}
 .print-head{display:none}
 
+.photos{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.photo{position:relative;width:120px;margin:0}
+.photo img{display:block;width:120px;height:120px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#f1f5f9}
+.photo figcaption{font-size:11px;color:var(--sub);margin-top:3px;text-align:center}
+.photo.main img{border:2px solid var(--blue)}
+.photo.main figcaption{color:var(--blue);font-weight:700}
+.photo-del{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(15,23,42,.7);color:#fff;font-size:14px;line-height:24px;padding:0}
+.photo-add{width:120px;height:120px;border:1.5px dashed #94a3b8;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:var(--blue);font-weight:700;font-size:13px;background:#fbfcfe}
+.photo-add small{font-weight:400;font-size:10.5px;color:var(--mute)}
+.photo-add.full{display:none}
+body.print-mode .photos{gap:5px;margin:4px 0}
+body.print-mode .photo,body.print-mode .photo img{width:78px}
+body.print-mode .photo img{height:78px;border-radius:5px}
+body.print-mode .photo figcaption{font-size:8px;margin-top:1px}
+body.print-mode .photo-del,body.print-mode .photo-add{display:none}
+
 /* ---------- 한 장 출력 레이아웃 ---------- */
 body.print-mode{background:#fff;font-size:10px;line-height:1.45}
 body.print-mode .wrap{width:718px;max-width:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;align-items:start;transform-origin:top left}
@@ -160,6 +176,12 @@ body.print-mode footer{display:none}
 <section class="card" data-sec="③ 사진 1장">
   <div class="sec-head"><span class="num">③</span><h2>사진 1장 깊게</h2><span class="time">6분</span></div>
   <div class="prompt">"그날을 떠올릴 때 가장 먼저 생각나는 사진을 1장 골라 주세요."</div>
+  <div class="photos" id="photos">
+    <label class="photo-add" id="photoAdd">
+      <input type="file" id="photoInput" accept="image/*" multiple hidden>
+      <span>＋ 사진 추가</span><small>최대 3장 · 첫 장을 깊게</small>
+    </label>
+  </div>
   <ol class="q">
     <li>이 사진을 왜 찍었나요?</li>
     <li>이 장면에서 가장 중요한 것은 무엇인가요?</li>
@@ -316,6 +338,37 @@ document.getElementById('pdfBtn').onclick=()=>{enterPrint();
   const z=parseFloat(wrapEl.style.zoom)||1;
   if(z<0.6&&!confirm(`메모가 길어서 한 장에 맞추면 글자가 ${Math.round(z*100)}% 크기로 작아집니다. 그래도 저장할까요?`)){exitPrint();return}setTimeout(()=>{window.print();setTimeout(exitPrint,500)},60)};
 
+/* ---------- ③ 참여자 사진 ---------- */
+const PHOTO_KEY='spectra-interview-photos-v1';
+let photos=[];
+const photoBox=document.getElementById('photos'),photoAdd=document.getElementById('photoAdd');
+function renderPhotos(){
+  photoBox.querySelectorAll('.photo').forEach(f=>f.remove());
+  photos.forEach((src,i)=>{
+    const f=document.createElement('figure');f.className='photo'+(i===0?' main':'');
+    const img=document.createElement('img');img.src=src;img.alt=`참여자 사진 ${i+1}`;
+    const cap=document.createElement('figcaption');cap.textContent=i===0?'① 깊게 볼 사진':`사진 ${i+1}`;
+    const del=document.createElement('button');del.className='photo-del';del.type='button';del.textContent='×';del.setAttribute('aria-label','사진 삭제');
+    del.onclick=()=>{photos.splice(i,1);renderPhotos();savePhotos()};
+    f.append(img,del,cap);photoBox.insertBefore(f,photoAdd);
+  });
+  photoAdd.classList.toggle('full',photos.length>=3);
+}
+function savePhotos(){try{localStorage.setItem(PHOTO_KEY,JSON.stringify(photos))}catch(e){alert('사진이 브라우저 저장 공간을 넘어 새로고침하면 사라질 수 있어요. 인터뷰가 끝나면 바로 PDF로 저장해 주세요.')}}
+function shrink(file){return new Promise((res,rej)=>{
+  const url=URL.createObjectURL(file);const img=new Image();
+  img.onload=()=>{const M=900,r=Math.min(1,M/Math.max(img.width,img.height));
+    const c=document.createElement('canvas');c.width=Math.round(img.width*r);c.height=Math.round(img.height*r);
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);res(c.toDataURL('image/jpeg',.78))};
+  img.onerror=()=>{URL.revokeObjectURL(url);rej()};img.src=url;})}
+document.getElementById('photoInput').onchange=async e=>{
+  const files=[...e.target.files].slice(0,3-photos.length);
+  for(const f of files){try{photos.push(await shrink(f))}catch(_){alert('이 사진은 열 수 없어요. 다른 형식으로 다시 올려 주세요.')}}
+  e.target.value='';renderPhotos();savePhotos();
+};
+try{photos=JSON.parse(localStorage.getItem(PHOTO_KEY)||'[]')}catch(e){photos=[]}
+renderPhotos();
+
 /* ---------- 임시 저장 ---------- */
 const KEY='spectra-interview-draft-v2';
 function save(){try{localStorage.setItem(KEY,JSON.stringify({
@@ -340,7 +393,8 @@ document.addEventListener('input',save);
 document.addEventListener('click',e=>{if(e.target.closest('.chip,.pick button'))setTimeout(save,0)});
 document.getElementById('resetBtn').onclick=()=>{
   if(!confirm('지금 기록을 지우고 새 참여자로 시작할까요? (먼저 PDF 저장이나 기록 복사를 해 두세요)'))return;
-  try{localStorage.removeItem(KEY)}catch(e){}
+  try{localStorage.removeItem(KEY);localStorage.removeItem(PHOTO_KEY)}catch(e){}
+  photos=[];renderPhotos();
   document.querySelectorAll('textarea,.meta input').forEach(i=>i.value='');
   [...chipBox.children].forEach(c=>{c.dataset.s='0';c.className='chip'});
   document.querySelectorAll('.pick button.on').forEach(b=>b.classList.remove('on'));
