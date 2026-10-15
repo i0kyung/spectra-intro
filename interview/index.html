@@ -60,19 +60,54 @@ textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:1
 .codes span{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:#fff}
 body.participant .host{display:none}
 footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
-.print-text{display:none;white-space:pre-wrap;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:14px;min-height:40px;background:#fbfcfe}
+.print-text{display:none;white-space:pre-wrap;word-break:break-all;border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin-top:8px;min-height:30px;background:#fbfcfe}
 .print-head{display:none}
+
+/* ---------- 한 장 출력 레이아웃 ---------- */
+body.print-mode{background:#fff;font-size:10px;line-height:1.45}
+body.print-mode .wrap{width:718px;max-width:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;align-items:start;transform-origin:top left}
+body.print-mode header,body.print-mode .print-head,body.print-mode .wide,body.print-mode footer{grid-column:1/-1}
+body.print-mode .toolbar,body.print-mode textarea,body.print-mode .legend{display:none}
+body.print-mode .participant-only{display:none}
+body.print-mode .print-head{display:block;font-size:9px;color:var(--sub);border-bottom:1px solid var(--line);padding-bottom:4px}
+body.print-mode header{margin:0}
+body.print-mode .eyebrow{font-size:8px}
+body.print-mode h1{font-size:16px;margin:2px 0}
+body.print-mode .lead{font-size:9.5px}
+body.print-mode .meta{display:none}
+body.print-mode .card{margin:0;padding:8px 10px;border-radius:8px;border-color:#cbd5e1;break-inside:avoid}
+body.print-mode .sec-head{gap:6px}
+body.print-mode .num{font-size:9px;padding:1px 5px;border-radius:4px}
+body.print-mode h2{font-size:11px}
+body.print-mode .time{font-size:9px}
+body.print-mode .goal{font-size:9px;margin:2px 0 4px}
+body.print-mode .prompt{padding:4px 7px;margin:4px 0;border-radius:6px;font-size:9.5px}
+body.print-mode ol.q{margin:2px 0 0;padding-left:15px}
+body.print-mode ol.q li{margin:1px 0}
+body.print-mode .probe{font-size:9px;margin:3px 0 0}
+body.print-mode .note{font-size:8.5px;padding:3px 6px;margin:4px 0 0}
+body.print-mode .print-text{display:block;font-size:9.5px}
+body.print-mode .chips{gap:4px;margin:4px 0}
+body.print-mode .chip{font-size:8.5px;padding:2px 7px}
+body.print-mode .chip:not(.must):not(.skip){opacity:.4}
+body.print-mode .concepts{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
+body.print-mode .concept{flex-direction:row;border-radius:6px}
+body.print-mode .concept svg{width:46%;flex:none}
+body.print-mode .concept .body{padding:4px 6px}
+body.print-mode .letter{font-size:13px}
+body.print-mode .concept p{font-size:8.5px;margin:0}
+body.print-mode .state{display:none}
+body.print-mode .pick{margin-top:3px;gap:3px}
+body.print-mode .pick button{font-size:8px;padding:1px 4px}
+body.print-mode .pick button:not(.on){display:none}
+body.print-mode .codes{gap:3px;margin-top:4px}
+body.print-mode .codes span{font-size:8px;padding:1px 5px}
+body.print-mode footer{display:none}
 @media print{
-  @page{size:A4;margin:14mm}
+  @page{size:A4 portrait;margin:10mm}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body{background:#fff}
-  .wrap{padding:0;max-width:none}
-  .toolbar,.pick button:not(.on){display:none}
-  .card{break-inside:avoid;border-color:#cbd5e1}
-  textarea{display:none}
-  .print-text{display:block}
-  .print-head{display:block;font-size:12px;color:var(--sub);margin-bottom:8px}
-  .chip:not(.must):not(.skip){opacity:.45}
+  html,body{background:#fff}
+  .toolbar{display:none}
 }
 </style>
 </head>
@@ -93,6 +128,7 @@ footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
 <div class="toolbar">
   <button class="btn" id="modeBtn" aria-pressed="false">참여자 화면 모드</button>
   <button class="btn" id="shuffleBtn">컨셉 순서 섞기</button>
+  <button class="btn" id="resetBtn">새 참여자</button>
   <button class="btn" id="copyBtn">기록 복사</button>
   <button class="btn primary" id="pdfBtn">PDF 저장</button>
   <span class="total">총 약 25분</span>
@@ -145,7 +181,7 @@ footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
   <textarea placeholder="메모"></textarea>
 </section>
 
-<section class="card" data-sec="⑤ 좋은 경험">
+<section class="card wide" data-sec="⑤ 좋은 경험">
   <div class="sec-head"><span class="num">⑤</span><h2>좋은 생일카페란</h2><span class="time">4분</span></div>
   <div class="prompt">"OO님이 생각하는 좋은 생일카페는 어떤 곳인가요?" <span class="host" style="font-weight:400">— 자유 답변 먼저</span></div>
   <p class="legend">그다음 보여주기 · 한 번 누르면 <b>꼭 있어야 함</b>(2개), 두 번 누르면 <b>없어도 됨</b>(2개)</p>
@@ -156,7 +192,7 @@ footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
   <textarea placeholder="메모"></textarea>
 </section>
 
-<section class="card" data-sec="⑥ 컨셉 테스트">
+<section class="card wide" data-sec="⑥ 컨셉 테스트">
   <div class="sec-head"><span class="num">⑥</span><h2>세 가지 방향 보기</h2><span class="time">7분</span></div>
   <p class="goal">아래 세 장면을 같이 봐 주세요. 실제 생일카페 벽 한쪽에 설치된다고 생각하면 됩니다.</p>
   <div class="concepts" id="concepts">
@@ -194,7 +230,7 @@ footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
   <textarea placeholder="메모"></textarea>
 </section>
 
-<div class="card host">
+<div class="card host wide">
   <div class="sec-head"><span class="num">정리</span><h2>24시간 안에 태깅</h2></div>
   <div class="codes"><span>MEMORY 기억 장면</span><span>TRIGGER 멈춤·촬영 유발</span><span>IDENTITY 아티스트다움</span><span>EMOTION 직접 말한 감정</span><span>ACTION 행동</span><span>SOCIAL 동행·팬 교류</span><span>FRICTION 불편·민망</span><span>RECOGNIZED 개인으로 인식됨</span></div>
   <p class="probe"><b>판정</b> · 3명 이상 반복 = 패턴 후보 · 반대 사례는 예외로 따로 기록 · 연구자가 제시한 말보다 참여자가 먼저 꺼낸 말에 가중치.</p>
@@ -206,10 +242,11 @@ footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
 
 <script>
 /* ---------- 참여자 모드 / 섞기 ---------- */
+const pidEl=document.getElementById('pid'),pdateEl=document.getElementById('pdate'),pipEl=document.getElementById('pip');
 const modeBtn=document.getElementById('modeBtn');
 modeBtn.onclick=()=>{const on=document.body.classList.toggle('participant');modeBtn.setAttribute('aria-pressed',on)};
 document.getElementById('shuffleBtn').onclick=()=>{
-  const box=document.getElementById('concepts');const items=[...box.children];
+  const box=document.getElementById('concepts');const items=[...box.children];setTimeout(save,0);
   for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}
   items.forEach(el=>box.appendChild(el));
 };
@@ -226,7 +263,7 @@ document.querySelectorAll('.concept .pick').forEach(p=>tags.forEach(t=>{const b=
 
 /* ---------- 기록 복사 ---------- */
 document.getElementById('copyBtn').onclick=async()=>{
-  let out=`[SPECTRA 팬 인터뷰] ${pid.value} · ${pdate.value} · ${pip.value}\n\n`;
+  let out=`[SPECTRA 팬 인터뷰] ${pidEl.value} · ${pdateEl.value} · ${pipEl.value}\n\n`;
   document.querySelectorAll('section[data-sec]').forEach(s=>{const t=s.querySelector('textarea').value.trim();out+=`■ ${s.dataset.sec}\n${t||'-'}\n\n`});
   const must=[...chipBox.children].filter(c=>c.dataset.s=='1').map(c=>c.textContent);
   const skip=[...chipBox.children].filter(c=>c.dataset.s=='2').map(c=>c.textContent);
@@ -235,35 +272,82 @@ document.getElementById('copyBtn').onclick=async()=>{
   try{await navigator.clipboard.writeText(out);alert('기록을 복사했습니다.')}catch(e){prompt('아래 내용을 복사하세요',out)}
 };
 
-/* ---------- PDF 저장 ---------- */
-function preparePrint(){
+/* ---------- PDF 저장 (A4 한 장) ---------- */
+const PAGE_W=718, PAGE_H=1020; // A4 - 여백 10mm, 96dpi 기준
+const wrapEl=document.querySelector('.wrap');
+let printing=false, wasParticipant=false, oldTitle=document.title;
+function fillPrintText(){
   document.querySelectorAll('textarea').forEach(t=>{
     let d=t.nextElementSibling;
     if(!d||!d.classList.contains('print-text')){d=document.createElement('div');d.className='print-text';t.after(d)}
-    d.textContent=t.value.trim()||'(기록 없음)';
+    d.textContent=t.value.trim()||' ';
   });
   const order=[...document.getElementById('concepts').children].map(c=>c.dataset.c).join(' → ');
-  document.getElementById('printHead').textContent=`참여자 ${pid.value||'-'} · ${pdate.value||'-'} · ${pip.value||'-'} · 컨셉 제시 순서 ${order}`;
+  document.getElementById('printHead').textContent=`참여자 ${pidEl.value||'____'}   ·   날짜 ${pdateEl.value||'____'}   ·   아티스트·IP ${pipEl.value||'____'}   ·   컨셉 제시 순서 ${order}`;
 }
-let wasParticipant=false,oldTitle=document.title;
-window.addEventListener('beforeprint',()=>{
-  preparePrint();
+function enterPrint(){
+  if(printing)return; printing=true;
+  fillPrintText();
   wasParticipant=document.body.classList.contains('participant');
   document.body.classList.remove('participant');
+  document.body.classList.add('print-mode');
+  paused=true; renderAll(5); // 정지 장면: 사람이 서서 반응을 보는 순간
+  wrapEl.style.zoom=1;
+  const h=wrapEl.scrollHeight;
+  let z=Math.min(1,PAGE_H/h,PAGE_W/wrapEl.scrollWidth);
+  wrapEl.style.zoom=z.toFixed(3);
+  // 줌에 따라 줄바꿈이 바뀌므로 실제 높이를 다시 재서 한 장에 들어갈 때까지 줄인다
+  for(let i=0;i<20&&wrapEl.getBoundingClientRect().height>PAGE_H;i++){z*=0.97;wrapEl.style.zoom=z.toFixed(3)}
   oldTitle=document.title;
-  document.title=`SPECTRA_팬인터뷰_${pid.value||'참여자'}_${(pdate.value||'').replace(/[\\/:*?"<>|\s]+/g,'-')}`.replace(/_$/,'');
-});
-window.addEventListener('afterprint',()=>{
+  const safe=v=>v.replace(/[\\/:*?"<>|\s]+/g,'-');
+  document.title=['SPECTRA_팬인터뷰',safe(pidEl.value||'참여자'),safe(pdateEl.value||'')].filter(Boolean).join('_');
+}
+function exitPrint(){
+  if(!printing)return; printing=false;
+  document.body.classList.remove('print-mode');
+  wrapEl.style.zoom='';
   if(wasParticipant)document.body.classList.add('participant');
   document.title=oldTitle;
-});
-document.getElementById('pdfBtn').onclick=()=>window.print();
+  paused=false; requestAnimationFrame(frame);
+}
+window.addEventListener('beforeprint',enterPrint);
+window.addEventListener('afterprint',exitPrint);
+document.getElementById('pdfBtn').onclick=()=>{enterPrint();
+  const z=parseFloat(wrapEl.style.zoom)||1;
+  if(z<0.6&&!confirm(`메모가 길어서 한 장에 맞추면 글자가 ${Math.round(z*100)}% 크기로 작아집니다. 그래도 저장할까요?`)){exitPrint();return}setTimeout(()=>{window.print();setTimeout(exitPrint,500)},60)};
 
 /* ---------- 임시 저장 ---------- */
-const KEY='spectra-interview-draft';
-function save(){try{localStorage.setItem(KEY,JSON.stringify({m:[pid.value,pdate.value,pip.value],t:[...document.querySelectorAll('textarea')].map(t=>t.value)}))}catch(e){}}
-try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d){[pid.value,pdate.value,pip.value]=d.m;document.querySelectorAll('textarea').forEach((t,i)=>t.value=d.t[i]||'')}}catch(e){}
+const KEY='spectra-interview-draft-v2';
+function save(){try{localStorage.setItem(KEY,JSON.stringify({
+  m:[pidEl.value,pdateEl.value,pipEl.value],
+  t:[...document.querySelectorAll('textarea')].map(t=>t.value),
+  chips:[...chipBox.children].map(c=>c.dataset.s),
+  picks:[...document.querySelectorAll('.concept')].map(c=>({c:c.dataset.c,on:[...c.querySelectorAll('.pick button')].map(b=>b.classList.contains('on'))})),
+  order:[...document.getElementById('concepts').children].map(c=>c.dataset.c)
+}))}catch(e){}}
+function restore(){try{
+  const d=JSON.parse(localStorage.getItem(KEY)||'null');if(!d)return;
+  [pidEl.value,pdateEl.value,pipEl.value]=d.m;
+  document.querySelectorAll('textarea').forEach((t,i)=>t.value=d.t[i]||'');
+  (d.chips||[]).forEach((v,i)=>{const c=chipBox.children[i];if(c){c.dataset.s=v;c.className='chip'+(v=='1'?' must':v=='2'?' skip':'')}});
+  const box=document.getElementById('concepts');
+  (d.order||[]).forEach(k=>{const el=box.querySelector(`[data-c="${k}"]`);el&&box.appendChild(el)});
+  (d.picks||[]).forEach(p=>{const c=box.querySelector(`[data-c="${p.c}"]`);c&&c.querySelectorAll('.pick button').forEach((b,i)=>b.classList.toggle('on',!!p.on[i]))});
+}catch(e){}}
+restore();
+if(!pdateEl.value){const n=new Date();pdateEl.value=`${n.getFullYear()}.${n.getMonth()+1}.${n.getDate()}`}
 document.addEventListener('input',save);
+document.addEventListener('click',e=>{if(e.target.closest('.chip,.pick button'))setTimeout(save,0)});
+document.getElementById('resetBtn').onclick=()=>{
+  if(!confirm('지금 기록을 지우고 새 참여자로 시작할까요? (먼저 PDF 저장이나 기록 복사를 해 두세요)'))return;
+  try{localStorage.removeItem(KEY)}catch(e){}
+  document.querySelectorAll('textarea,.meta input').forEach(i=>i.value='');
+  [...chipBox.children].forEach(c=>{c.dataset.s='0';c.className='chip'});
+  document.querySelectorAll('.pick button.on').forEach(b=>b.classList.remove('on'));
+  const n=new Date();pdateEl.value=`${n.getFullYear()}.${n.getMonth()+1}.${n.getDate()}`;
+  document.getElementById('shuffleBtn').click();
+  window.scrollTo(0,0);
+};
 
 /* ---------- 시뮬레이션 공통 ---------- */
 const NS='http://www.w3.org/2000/svg';
@@ -388,11 +472,12 @@ function floor(svg,color){el('rect',{x:0,y:192,width:300,height:28,fill:color},s
 })();
 
 /* ---------- 루프 ---------- */
+let paused=false;
 const start=performance.now();
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function frame(now){const t=((now-start)/1000)%LOOP;simA(t);simB(t);simC(t);if(!reduce)requestAnimationFrame(frame)}
-requestAnimationFrame(frame);
-if(reduce){simA(5);simB(5);simC(4)}
+function renderAll(t){simA(t);simB(t);simC(t)}
+function frame(now){if(paused)return;renderAll(((now-start)/1000)%LOOP);if(!reduce)requestAnimationFrame(frame)}
+if(reduce)renderAll(5);else requestAnimationFrame(frame);
 </script>
 </body>
 </html>
