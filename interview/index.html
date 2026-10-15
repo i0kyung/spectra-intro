@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPECTRA 팬 인터뷰지</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --bg:#f5f7fb; --card:#ffffff; --ink:#0f172a; --sub:#475569; --mute:#94a3b8;
+  --line:#e2e8f0; --blue:#2563eb; --blue-soft:#eaf1ff; --blue-deep:#1e3a8a;
+  --warn:#b45309; --warn-soft:#fff7e6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 80px}
+header{margin-bottom:20px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--blue)}
+h1{font-size:28px;line-height:1.3;margin:6px 0 8px;letter-spacing:-.02em}
+.lead{color:var(--sub);margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.meta input{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font:inherit;font-size:14px;background:#fff;min-width:0;flex:1 1 140px}
+.toolbar{position:sticky;top:0;z-index:5;background:rgba(245,247,251,.92);backdrop-filter:blur(8px);padding:10px 0;margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--line)}
+.toolbar .total{margin-left:auto;font-size:13px;color:var(--sub)}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--ink)}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn[aria-pressed="true"]{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:14px 0}
+.sec-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.num{font-size:13px;font-weight:800;color:var(--blue);background:var(--blue-soft);border-radius:8px;padding:2px 8px}
+h2{font-size:19px;margin:0;letter-spacing:-.01em}
+.time{margin-left:auto;font-size:13px;color:var(--mute);font-weight:600}
+.goal{font-size:13px;color:var(--sub);margin:6px 0 12px}
+.prompt{background:var(--blue-soft);border-radius:12px;padding:12px 14px;font-weight:600;color:var(--blue-deep);margin:10px 0}
+ol.q{margin:8px 0 0;padding-left:22px}
+ol.q li{margin:6px 0}
+.probe{font-size:14px;color:var(--sub);margin:8px 0 0}
+.probe b{color:var(--ink)}
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);border-radius:0 10px 10px 0;padding:10px 12px;font-size:13px;color:#7c4a03;margin:12px 0 0}
+.note b{color:#5c3300}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:14px;margin-top:12px;resize:vertical;background:#fbfcfe}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px}
+.chip.must{background:var(--blue);border-color:var(--blue);color:#fff}
+.chip.skip{background:#f1f5f9;color:var(--mute);text-decoration:line-through}
+.legend{font-size:12px;color:var(--mute)}
+.concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+@media (max-width:720px){.concepts{grid-template-columns:1fr}}
+.concept{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.concept svg{display:block;width:100%;height:auto;background:#0b1020}
+.concept .body{padding:12px 14px 14px}
+.letter{font-size:22px;font-weight:800;color:var(--blue)}
+.concept p{margin:4px 0 0;font-size:14px;color:var(--sub)}
+.state{font-size:11px;color:var(--mute);margin-top:6px;min-height:16px}
+.pick{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.pick button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 8px;font-size:12px}
+.pick button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.codes{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.codes span{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:#fff}
+body.participant .host{display:none}
+footer{text-align:center;color:var(--mute);font-size:12px;margin-top:30px}
+@media print{.toolbar,.btn{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">SPECTRA · 사용자 심화 조사</div>
+  <h1>생일카페 팬 인터뷰지</h1>
+  <p class="lead">팬에게 기억에 남는 생일카페 경험이 무엇인지, 그리고 그 안에서 <b>'나를 알아봐 주는 느낌'</b>이 어떤 자리를 차지하는지 확인한다.</p>
+  <div class="meta">
+    <input id="pid" placeholder="참여자 코드 (예: P03)">
+    <input id="pdate" placeholder="날짜">
+    <input id="pip" placeholder="좋아하는 아티스트·IP">
+  </div>
+</header>
+
+<div class="toolbar">
+  <button class="btn" id="modeBtn" aria-pressed="false">참여자 화면 모드</button>
+  <button class="btn" id="shuffleBtn">컨셉 순서 섞기</button>
+  <button class="btn primary" id="copyBtn">기록 복사</button>
+  <span class="total">총 약 25분</span>
+</div>
+
+<section class="card" data-sec="① 워밍업">
+  <div class="sec-head"><span class="num">①</span><h2>워밍업</h2><span class="time">2분</span></div>
+  <ol class="q">
+    <li>어떤 아티스트나 캐릭터를 좋아하시나요?</li>
+    <li>가장 최근에 간 생일카페는 언제였고, 누구와 갔나요?</li>
+  </ol>
+  <p class="note host"><b>사전 스크리너로 확인:</b> 최근 3개월 내 방문 여부, 1년간 방문 횟수.</p>
+  <textarea placeholder="메모"></textarea>
+</section>
+
+<section class="card" data-sec="② 방문 복원">
+  <div class="sec-head"><span class="num">②</span><h2>최근 방문 복원</h2><span class="time">6분</span></div>
+  <div class="prompt">"가장 최근에 갔던 생일카페를, 가기 전부터 나온 순간까지 순서대로 이야기해 주세요."</div>
+  <ol class="q">
+    <li>들어가서 가장 먼저 본 것은 무엇이었나요?</li>
+    <li>가장 오래 머문 곳은 어디였나요?</li>
+    <li>어느 순간에 '오길 잘했다'고 느꼈나요?</li>
+    <li>기대와 달랐던 순간이 있었나요?</li>
+  </ol>
+  <p class="probe"><b>꼬리 질문</b> · 그 직전에 무엇을 하고 있었나요? · 왜 거기서 멈췄나요?</p>
+  <textarea placeholder="메모"></textarea>
+</section>
+
+<section class="card" data-sec="③ 사진 1장">
+  <div class="sec-head"><span class="num">③</span><h2>사진 1장 깊게</h2><span class="time">6분</span></div>
+  <div class="prompt">"그날을 떠올릴 때 가장 먼저 생각나는 사진을 1장 골라 주세요."</div>
+  <ol class="q">
+    <li>이 사진을 왜 찍었나요?</li>
+    <li>이 장면에서 가장 중요한 것은 무엇인가요?</li>
+    <li>그게 그 아티스트답다고 느껴졌나요? 어떤 점에서요?</li>
+    <li>누구에게 공유했나요? 왜 이 장면이었나요?</li>
+  </ol>
+  <p class="probe"><b>나머지 사진</b> · "이건 왜 찍었나요?"만 짧게.</p>
+  <textarea placeholder="메모"></textarea>
+</section>
+
+<section class="card" data-sec="④ 알아봐 준 순간">
+  <div class="sec-head"><span class="num">④</span><h2>'나'로 연결된 순간</h2><span class="time">4분</span></div>
+  <p class="goal host">SPECTRA 핵심 가설을 데모 없이 확인하는 구간. 참여자가 먼저 꺼내는지가 중요하다.</p>
+  <ol class="q">
+    <li>생일카페나 팬 활동에서 '나를 위한 거다', '나를 기억해 준다'고 느낀 순간이 있었나요?</li>
+    <li>이름·메시지처럼 나에게 맞춰진 특전이나 이벤트를 받아본 적 있나요? 그때 무엇을 했나요?</li>
+    <li>반대로 '그냥 수많은 방문객 중 한 명'처럼 느껴진 순간은요?</li>
+  </ol>
+  <textarea placeholder="메모"></textarea>
+</section>
+
+<section class="card" data-sec="⑤ 좋은 경험">
+  <div class="sec-head"><span class="num">⑤</span><h2>좋은 생일카페란</h2><span class="time">4분</span></div>
+  <div class="prompt">"OO님이 생각하는 좋은 생일카페는 어떤 곳인가요?" <span class="host" style="font-weight:400">— 자유 답변 먼저</span></div>
+  <p class="legend">그다음 보여주기 · 한 번 누르면 <b>꼭 있어야 함</b>(2개), 두 번 누르면 <b>없어도 됨</b>(2개)</p>
+  <div class="chips" id="valueChips"></div>
+  <ol class="q">
+    <li>다음 생일카페에서 딱 하나만 달라질 수 있다면 무엇이면 좋겠나요?</li>
+  </ol>
+  <textarea placeholder="메모"></textarea>
+</section>
+
+<section class="card" data-sec="⑥ 컨셉 테스트">
+  <div class="sec-head"><span class="num">⑥</span><h2>세 가지 방향 보기</h2><span class="time">7분</span></div>
+  <p class="goal">아래 세 장면을 같이 봐 주세요. 실제 생일카페 벽 한쪽에 설치된다고 생각하면 됩니다.</p>
+  <div class="concepts" id="concepts">
+    <div class="concept" data-c="A">
+      <svg viewBox="0 0 300 220" id="svgA"></svg>
+      <div class="body"><span class="letter">A</span>
+        <p>기존 포토존에 겹겹의 레이어·오브제·조명을 더해 사진이 입체적으로 보이게 한다.</p>
+        <div class="state host" id="stA"></div>
+        <div class="pick"></div></div>
+    </div>
+    <div class="concept" data-c="B">
+      <svg viewBox="0 0 300 220" id="svgB"></svg>
+      <div class="body"><span class="letter">B</span>
+        <p>영상·빛·움직임·소리로 벽 전체가 바뀌어 아티스트의 세계 안에 들어온 듯한 공간이 된다.</p>
+        <div class="state host" id="stB"></div>
+        <div class="pick"></div></div>
+    </div>
+    <div class="concept" data-c="C">
+      <svg viewBox="0 0 300 220" id="svgC"></svg>
+      <div class="body"><span class="letter">C</span>
+        <p>화면 속 캐릭터가 다가온 사람을 알아보고 눈을 맞추며, 손을 들면 하이파이브로 반응한다.</p>
+        <div class="state host" id="stC"></div>
+        <div class="pick"></div></div>
+    </div>
+  </div>
+  <ol class="q" style="margin-top:16px">
+    <li>생일카페에 실제로 있다면 가장 먼저 가볼 것은? 왜요?</li>
+    <li>그게 '새로워서'인가요, '좋아하는 대상과 더 가깝게 느껴져서'인가요?</li>
+    <li>사진·영상으로 남기고 싶은 것은?</li>
+    <li>한 번 해보고 끝날 것 같은 것은?</li>
+    <li>뒤에 사람이 줄 서 있다면, 30초 안에 해볼 것 같은 것은? 민망하거나 부담스러운 것은?</li>
+    <li>다음 생일카페에 이게 있다면, 그것 때문에 한 번 더 갈 것 같은 것은?</li>
+  </ol>
+  <p class="note host"><b>내부 메모:</b> C가 현재 SPECTRA 데모 방향이다. 참여자에게 말하지 않는다. 참여자마다 '컨셉 순서 섞기'로 제시 순서를 바꾼다.</p>
+  <textarea placeholder="메모"></textarea>
+</section>
+
+<div class="card host">
+  <div class="sec-head"><span class="num">정리</span><h2>24시간 안에 태깅</h2></div>
+  <div class="codes"><span>MEMORY 기억 장면</span><span>TRIGGER 멈춤·촬영 유발</span><span>IDENTITY 아티스트다움</span><span>EMOTION 직접 말한 감정</span><span>ACTION 행동</span><span>SOCIAL 동행·팬 교류</span><span>FRICTION 불편·민망</span><span>RECOGNIZED 개인으로 인식됨</span></div>
+  <p class="probe"><b>판정</b> · 3명 이상 반복 = 패턴 후보 · 반대 사례는 예외로 따로 기록 · 연구자가 제시한 말보다 참여자가 먼저 꺼낸 말에 가중치.</p>
+  <p class="probe"><b>C 유지 근거</b> · ④에서 '알아봐 주는 느낌'이 자발적으로 나오고, ⑥에서 C를 고른 이유가 새로움보다 관계감일 때.</p>
+</div>
+
+<footer>SPECTRA · 팬 인터뷰지 v2</footer>
+</div>
+
+<script>
+/* ---------- 참여자 모드 / 섞기 ---------- */
+const modeBtn=document.getElementById('modeBtn');
+modeBtn.onclick=()=>{const on=document.body.classList.toggle('participant');modeBtn.setAttribute('aria-pressed',on)};
+document.getElementById('shuffleBtn').onclick=()=>{
+  const box=document.getElementById('concepts');const items=[...box.children];
+  for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}
+  items.forEach(el=>box.appendChild(el));
+};
+
+/* ---------- 가치 칩 ---------- */
+const values=['최애를 축하했다는 느낌','아티스트의 분위기·세계관','예쁜 사진','특전·굿즈','새로운 체험','다른 팬과의 교류','공간 디자인','희소성','편하게 머무를 수 있음','나를 알아봐 주는 느낌'];
+const chipBox=document.getElementById('valueChips');
+values.forEach(v=>{const b=document.createElement('button');b.className='chip';b.textContent=v;b.dataset.s='0';
+  b.onclick=()=>{const s=(+b.dataset.s+1)%3;b.dataset.s=s;b.className='chip'+(s==1?' must':s==2?' skip':'')};chipBox.appendChild(b)});
+
+/* ---------- 컨셉별 반응 기록 ---------- */
+const tags=['먼저 가볼 것','남기고 싶음','한 번 끝','부담됨','재방문'];
+document.querySelectorAll('.concept .pick').forEach(p=>tags.forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>b.classList.toggle('on');p.appendChild(b)}));
+
+/* ---------- 기록 복사 ---------- */
+document.getElementById('copyBtn').onclick=async()=>{
+  let out=`[SPECTRA 팬 인터뷰] ${pid.value} · ${pdate.value} · ${pip.value}\n\n`;
+  document.querySelectorAll('section[data-sec]').forEach(s=>{const t=s.querySelector('textarea').value.trim();out+=`■ ${s.dataset.sec}\n${t||'-'}\n\n`});
+  const must=[...chipBox.children].filter(c=>c.dataset.s=='1').map(c=>c.textContent);
+  const skip=[...chipBox.children].filter(c=>c.dataset.s=='2').map(c=>c.textContent);
+  out+=`■ 가치 선택\n꼭 있어야 함: ${must.join(', ')||'-'}\n없어도 됨: ${skip.join(', ')||'-'}\n\n■ 컨셉 반응 (제시 순서: ${[...document.getElementById('concepts').children].map(c=>c.dataset.c).join('→')})\n`;
+  document.querySelectorAll('.concept').forEach(c=>{const on=[...c.querySelectorAll('.pick .on')].map(b=>b.textContent);out+=`${c.dataset.c}: ${on.join(', ')||'-'}\n`});
+  try{await navigator.clipboard.writeText(out);alert('기록을 복사했습니다.')}catch(e){prompt('아래 내용을 복사하세요',out)}
+};
+
+/* ---------- 임시 저장 ---------- */
+const KEY='spectra-interview-draft';
+function save(){try{localStorage.setItem(KEY,JSON.stringify({m:[pid.value,pdate.value,pip.value],t:[...document.querySelectorAll('textarea')].map(t=>t.value)}))}catch(e){}}
+try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d){[pid.value,pdate.value,pip.value]=d.m;document.querySelectorAll('textarea').forEach((t,i)=>t.value=d.t[i]||'')}}catch(e){}
+document.addEventListener('input',save);
+
+/* ---------- 시뮬레이션 공통 ---------- */
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent&&parent.appendChild(e);return e}
+const LOOP=9;
+function personX(t){ // 왼쪽에서 걸어와 서고, 오른쪽으로 나감
+  if(t<3)return 20+(130-20)*easeOut(t/3);
+  if(t<7)return 130;
+  return 130+(300-130)*easeIn((t-7)/2);
+}
+function easeOut(x){return 1-Math.pow(1-x,2)}function easeIn(x){return x*x}
+function walking(t){return t<3||t>7}
+function makePerson(svg){
+  const g=el('g',{},svg);
+  el('ellipse',{cx:0,cy:196,rx:12,ry:3,fill:'rgba(0,0,0,.35)'},g);
+  const legL=el('line',{x1:-4,y1:170,x2:-5,y2:194,stroke:'#cbd5e1','stroke-width':5,'stroke-linecap':'round'},g);
+  const legR=el('line',{x1:4,y1:170,x2:5,y2:194,stroke:'#cbd5e1','stroke-width':5,'stroke-linecap':'round'},g);
+  el('rect',{x:-10,y:136,width:20,height:38,rx:8,fill:'#e2e8f0'},g);
+  const arm=el('line',{x1:8,y1:142,x2:12,y2:166,stroke:'#e2e8f0','stroke-width':5,'stroke-linecap':'round'},g);
+  el('circle',{cx:0,cy:124,r:10,fill:'#f1f5f9'},g);
+  return {g,legL,legR,arm};
+}
+function updatePerson(p,t,raise){
+  const x=personX(t);p.g.setAttribute('transform',`translate(${x},0)`);
+  const sw=walking(t)?Math.sin(t*10)*5:0;
+  p.legL.setAttribute('x2',-5+sw);p.legR.setAttribute('x2',5-sw);
+  if(raise>0){p.arm.setAttribute('x2',12+6*raise);p.arm.setAttribute('y2',166-46*raise)}
+  else{p.arm.setAttribute('x2',12);p.arm.setAttribute('y2',166)}
+  return x;
+}
+function floor(svg,color){el('rect',{x:0,y:192,width:300,height:28,fill:color},svg)}
+
+/* ---------- A. 포토존 확장 ---------- */
+(function(){
+  const s=document.getElementById('svgA');
+  el('rect',{x:0,y:0,width:300,height:220,fill:'#1e293b'},s);
+  const spot=el('polygon',{points:'150,0 95,192 205,192',fill:'#fde68a',opacity:0},s);
+  const back=el('g',{},s);el('rect',{x:70,y:28,width:160,height:150,rx:6,fill:'#334155'},back);
+  const mid=el('g',{},s);el('rect',{x:88,y:44,width:124,height:120,rx:6,fill:'#475569'},mid);
+  const front=el('g',{},s);
+  el('rect',{x:108,y:58,width:84,height:96,rx:4,fill:'#cbd5e1'},front);
+  el('rect',{x:114,y:64,width:72,height:72,fill:'#94a3b8'},front);
+  el('circle',{cx:150,cy:96,r:16,fill:'#e2e8f0'},front);
+  el('text',{x:150,y:148,'text-anchor':'middle','font-size':9,fill:'#334155','font-weight':700},front).textContent='HAPPY DAY';
+  const stars=[];[[60,60],[240,50],[248,130],[52,140]].forEach(([x,y])=>{stars.push(el('polygon',{points:star(x,y,7),fill:'#fbbf24'},s))});
+  floor(s,'#0f172a');
+  const p=makePerson(s);const st=document.getElementById('stA');
+  function star(cx,cy,r){let pts=[];for(let i=0;i<10;i++){const a=Math.PI/5*i-Math.PI/2,rr=i%2?r/2.4:r;pts.push((cx+Math.cos(a)*rr).toFixed(1)+','+(cy+Math.sin(a)*rr).toFixed(1))}return pts.join(' ')}
+  window.simA=t=>{
+    const x=updatePerson(p,t,0);const d=(x-150)/150;
+    back.setAttribute('transform',`translate(${-d*4},0)`);mid.setAttribute('transform',`translate(${-d*9},0)`);front.setAttribute('transform',`translate(${-d*15},0)`);
+    const near=t>2.4&&t<7.4?Math.min(1,(t-2.4)/.6,(7.4-t)/.4):0;
+    spot.setAttribute('opacity',(.22*near).toFixed(2));
+    stars.forEach((e,i)=>e.setAttribute('transform',`translate(0,${Math.sin(t*2+i)*3})`));
+    st.textContent=near?'조명이 켜지고 레이어가 시차로 움직임':'평소 포토존';
+  };
+})();
+
+/* ---------- B. 몰입형 공간 미디어 ---------- */
+(function(){
+  const s=document.getElementById('svgB');
+  const defs=el('defs',{},s);const lg=el('linearGradient',{id:'gB',x1:0,y1:0,x2:1,y2:1},defs);
+  const s1=el('stop',{offset:0,'stop-color':'#1e1b4b'},lg),s2=el('stop',{offset:1,'stop-color':'#0e7490'},lg);
+  el('rect',{x:0,y:0,width:300,height:220,fill:'url(#gB)'},s);
+  const waves=[];for(let i=0;i<4;i++)waves.push(el('path',{fill:'none',stroke:'#a5b4fc','stroke-width':2,opacity:.5},s));
+  const parts=[];for(let i=0;i<22;i++)parts.push({e:el('circle',{r:1.6,fill:'#e0f2fe'},s),x:Math.random()*300,sp:8+Math.random()*14,o:Math.random()*200});
+  const notes=[];['♪','♫','♪'].forEach((n,i)=>{const e=el('text',{'font-size':14,fill:'#f0abfc'},s);e.textContent=n;notes.push(e)});
+  floor(s,'#0b1020');
+  const rings=[];for(let i=0;i<3;i++)rings.push(el('ellipse',{cy:196,fill:'none',stroke:'#67e8f9','stroke-width':1.5},s));
+  const p=makePerson(s);const st=document.getElementById('stB');
+  window.simB=t=>{
+    const h=(t/LOOP)*360;s1.setAttribute('stop-color',`hsl(${250+Math.sin(h*Math.PI/180)*25},55%,18%)`);s2.setAttribute('stop-color',`hsl(${190+Math.cos(h*Math.PI/180)*30},65%,30%)`);
+    waves.forEach((w,i)=>{let d='M0 '+(60+i*30);for(let x=0;x<=300;x+=15)d+=` L${x} ${60+i*30+Math.sin(x/30+t*1.6+i)*8}`;w.setAttribute('d',d)});
+    parts.forEach(q=>{const y=(200-((t*q.sp+q.o)%200));q.e.setAttribute('cx',q.x);q.e.setAttribute('cy',y)});
+    const x=updatePerson(p,t,0);
+    const inside=t>2.6&&t<7.2;
+    rings.forEach((r,i)=>{const ph=((t*0.9+i/3)%1);r.setAttribute('cx',x);r.setAttribute('rx',inside?10+ph*90:0);r.setAttribute('ry',inside?3+ph*14:0);r.setAttribute('opacity',inside?(1-ph)*.8:0)});
+    notes.forEach((n,i)=>{const ph=((t*.5+i/3)%1);n.setAttribute('x',60+i*90+Math.sin(t+i)*8);n.setAttribute('y',180-ph*150);n.setAttribute('opacity',(Math.sin(ph*Math.PI)).toFixed(2))});
+    st.textContent=inside?'들어선 자리부터 빛과 소리가 퍼져 나감':'벽 전체가 천천히 흐르는 영상';
+  };
+})();
+
+/* ---------- C. 반응형 캐릭터 ---------- */
+(function(){
+  const s=document.getElementById('svgC');
+  el('rect',{x:0,y:0,width:300,height:220,fill:'#1e293b'},s);
+  el('rect',{x:112,y:20,width:76,height:168,rx:8,fill:'#0f172a',stroke:'#64748b','stroke-width':3},s);
+  const scr=el('rect',{x:116,y:24,width:68,height:160,rx:5,fill:'#dbeafe'},s);
+  const ch=el('g',{},s); // 오리지널 치비 캐릭터 (검정 자켓)
+  el('rect',{x:128,y:120,width:44,height:50,rx:16,fill:'#111827'},ch);
+  el('rect',{x:146,y:122,width:8,height:46,fill:'#f8fafc'},ch);
+  const handC=el('circle',{cx:128,cy:150,r:6,fill:'#fde2cf'},ch);
+  const head=el('g',{},ch);
+  el('circle',{cx:150,cy:92,r:26,fill:'#fde2cf'},head);
+  el('path',{d:'M124 90 Q126 62 150 62 Q176 62 176 92 Q168 76 150 78 Q134 78 124 90Z',fill:'#3f2a1d'},head);
+  el('ellipse',{cx:141,cy:94,rx:5,ry:6,fill:'#fff'},head);el('ellipse',{cx:159,cy:94,rx:5,ry:6,fill:'#fff'},head);
+  const pl=el('circle',{cx:141,cy:95,r:3,fill:'#1e293b'},head),pr=el('circle',{cx:159,cy:95,r:3,fill:'#1e293b'},head);
+  const mouth=el('path',{d:'M145 106 Q150 108 155 106',fill:'none',stroke:'#9a3412','stroke-width':2,'stroke-linecap':'round'},head);
+  el('ellipse',{cx:134,cy:103,rx:4,ry:2,fill:'#fca5a5',opacity:.6},head);el('ellipse',{cx:166,cy:103,rx:4,ry:2,fill:'#fca5a5',opacity:.6},head);
+  const bang=el('text',{x:172,y:62,'font-size':18,'font-weight':800,fill:'#2563eb',opacity:0},s);bang.textContent='!';
+  const spark=el('g',{opacity:0},s);for(let i=0;i<8;i++){const a=i*Math.PI/4;el('line',{x1:118+Math.cos(a)*6,y1:118+Math.sin(a)*6,x2:118+Math.cos(a)*14,y2:118+Math.sin(a)*14,stroke:'#facc15','stroke-width':2.5,'stroke-linecap':'round'},spark)}
+  floor(s,'#0f172a');
+  const p=makePerson(s);const st=document.getElementById('stC');
+  const labels={Idle:'대기',Notice:'알아봄',Approach:'다가옴',Interact:'하이파이브',Hold:'눈맞춤 유지',Farewell:'인사'};
+  window.simC=t=>{
+    let state='Idle';if(t>=1.2&&t<2.2)state='Notice';else if(t>=2.2&&t<3.4)state='Approach';else if(t>=3.4&&t<4.6)state='Interact';else if(t>=4.6&&t<7)state='Hold';else if(t>=7&&t<8.4)state='Farewell';
+    const raise=state==='Interact'?Math.sin((t-3.4)/1.2*Math.PI):0;
+    const x=updatePerson(p,t,raise);
+    const look=state==='Idle'?Math.sin(t*1.5)*2.5:Math.max(-4,Math.min(4,(x-150)/12));
+    pl.setAttribute('cx',141+look);pr.setAttribute('cx',159+look);
+    head.setAttribute('transform',`rotate(${state==='Idle'?Math.sin(t)*3:look*1.5} 150 110)`);
+    bang.setAttribute('opacity',state==='Notice'?1:0);
+    mouth.setAttribute('d',state==='Idle'?'M145 106 Q150 108 155 106':'M143 104 Q150 112 157 104');
+    let hx=128,hy=150;
+    if(state==='Interact'){hx=128-8*raise;hy=150-36*raise}
+    if(state==='Farewell'){hx=124+Math.sin(t*12)*4;hy=116}
+    handC.setAttribute('cx',hx);handC.setAttribute('cy',hy);
+    spark.setAttribute('opacity',state==='Interact'&&raise>.8?1:0);
+    scr.setAttribute('fill',state==='Idle'?'#dbeafe':'#e0e7ff');
+    st.textContent=`${state} · ${labels[state]}`;
+  };
+})();
+
+/* ---------- 루프 ---------- */
+const start=performance.now();
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function frame(now){const t=((now-start)/1000)%LOOP;simA(t);simB(t);simC(t);if(!reduce)requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+if(reduce){simA(5);simB(5);simC(4)}
+</script>
+</body>
+</html>
