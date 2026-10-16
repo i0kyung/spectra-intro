@@ -129,6 +129,21 @@ body.print-mode .print-text.empty{display:none}
 .quote{display:block;width:calc(100% - 30px);margin:6px 0 0 30px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:14px;background:#fffdf5}
 .quote[hidden]{display:none}
 
+/* ---------- 앱 안 브라우저 안내 · 저장 시트 ---------- */
+.inapp-bar{background:#fff7e6;border:1px solid #fcd34d;color:#7c4a03;border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:12px}
+.inapp-bar button{margin-left:6px;border:0;background:#f59e0b;color:#fff;border-radius:999px;padding:5px 10px;font-weight:700;font-size:12px}
+#sheet{position:fixed;inset:0;z-index:50;background:rgba(15,23,42,.55);display:flex;align-items:flex-end;justify-content:center}
+#sheet[hidden]{display:none}
+.sheet-box{background:#fff;width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px 16px 22px}
+.sheet-box h3{margin:0 0 6px;font-size:17px}
+.sheet-box p{margin:0 0 10px;font-size:14px;color:var(--sub)}
+.sheet-box img{width:100%;border:1px solid var(--line);border-radius:8px;margin-bottom:10px}
+.sheet-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.sheet-note{font-size:12px!important;color:var(--warn)!important}
+#sheetClose{width:100%;margin-top:6px}
+/* 캡처용: 화면 밖에 기록지를 실제 크기로 그린다 */
+body.capture #record{display:block;position:fixed;left:-10000px;top:0;width:718px;background:#fff;color:#0f172a;font-size:10.5px;line-height:1.5;padding:4px}
+
 /* ---------- 인터뷰 기록지 (PDF 전용) ---------- */
 #record{display:none}
 body.print-mode{background:#fff}
@@ -524,10 +539,76 @@ function exitPrint(){
 }
 window.addEventListener('beforeprint',enterPrint);
 window.addEventListener('afterprint',exitPrint);
-document.getElementById('pdfBtn').onclick=()=>{enterPrint();
-  const z=parseFloat(recEl.style.zoom)||1;
-  if(z<0.7&&!confirm(`적은 내용이 많아서 한 장에 맞추면 글자가 ${Math.round(z*100)}% 크기로 작아집니다. 그래도 저장할까요?`)){exitPrint();return}
-  setTimeout(()=>{window.print();setTimeout(exitPrint,500)},80)};
+/* ---------- PDF 파일 직접 만들기 (인쇄 창 없이) ---------- */
+const UA=navigator.userAgent;
+const IN_APP=/KAKAOTALK|Instagram|FBAN|FBAV|NAVER|Line\/|DaumApps|everytimeApp|Whale\/.*inapp/i.test(UA);
+const IS_KAKAO=/KAKAOTALK/i.test(UA), IS_ANDROID=/Android/i.test(UA);
+function loadScript(src){return new Promise((res,rej)=>{if(document.querySelector(`script[src="${src}"]`))return res();const t=document.createElement('script');t.src=src;t.onload=res;t.onerror=rej;document.head.appendChild(t)})}
+function pdfName(){const safe=v=>v.replace(/[\\/:*?"<>|\s]+/g,'-');return ['생카인터뷰',safe(pidEl.value||'참여자'),safe(pdateEl.value||'')].filter(Boolean).join('_')}
+async function makeCanvas(){
+  await Promise.all([
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')]);
+  buildRecord();
+  document.body.classList.add('capture');
+  try{
+    if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+    await Promise.all([...recEl.querySelectorAll('img')].map(im=>im.decode?im.decode().catch(()=>{}):null));
+    return await html2canvas(recEl,{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false,windowWidth:760});
+  }finally{document.body.classList.remove('capture')}
+}
+function canvasToPdf(canvas){
+  const {jsPDF}=window.jspdf;const pdf=new jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+  const M=10,W=210-2*M,H=297-2*M;let w=W,h=canvas.height*W/canvas.width;
+  if(h>H){h=H;w=canvas.width*H/canvas.height}
+  pdf.addImage(canvas.toDataURL('image/jpeg',0.92),'JPEG',M+(W-w)/2,M,w,h);
+  pdf.setProperties({title:pdfName(),subject:'생일카페 팬 인터뷰 기록'});
+  return pdf;
+}
+function showSheet(html){
+  let sh=document.getElementById('sheet');
+  if(!sh){sh=document.createElement('div');sh.id='sheet';document.body.appendChild(sh)}
+  sh.innerHTML=`<div class="sheet-box">${html}<button class="btn" id="sheetClose">닫기</button></div>`;
+  sh.hidden=false;document.getElementById('sheetClose').onclick=()=>{sh.hidden=true};
+}
+function openExternal(){
+  const url=location.href;
+  if(IS_KAKAO)location.href='kakaotalk://web/openExternal?url='+encodeURIComponent(url);
+  else if(IS_ANDROID)location.href='intent://'+url.replace(/^https?:\/\//,'')+'#Intent;scheme=https;package=com.android.chrome;end';
+  else alert('오른쪽 아래(또는 위) 메뉴에서 "Safari로 열기" / "다른 브라우저로 열기"를 눌러 주세요.');
+}
+const pdfBtn=document.getElementById('pdfBtn');
+pdfBtn.onclick=async()=>{
+  const label=pdfBtn.textContent;pdfBtn.disabled=true;pdfBtn.textContent='PDF 만드는 중…';
+  try{
+    const canvas=await makeCanvas();
+    const pdf=canvasToPdf(canvas);
+    if(IN_APP){
+      // 앱 안 브라우저는 파일 다운로드가 막히는 경우가 많아 이미지로도 보여준다
+      const img=canvas.toDataURL('image/jpeg',0.9);
+      showSheet(`<h3>기록지가 만들어졌어요</h3>
+        <p>카카오톡 같은 앱 안 브라우저는 PDF 저장이 막힐 수 있어요. <b>아래 이미지를 길게 눌러 저장</b>하거나, PDF 받기를 눌러 보세요.</p>
+        <img src="${img}" alt="인터뷰 기록지">
+        <div class="sheet-btns"><button class="btn primary" id="sheetPdf">PDF 받기</button><button class="btn" id="sheetExt">외부 브라우저로 열기</button></div>
+        <p class="sheet-note">외부 브라우저로 옮기면 지금까지 입력한 내용은 옮겨지지 않아요. 지금 기록은 먼저 이미지로 저장해 두세요.</p>`);
+      document.getElementById('sheetPdf').onclick=()=>{try{pdf.save(pdfName()+'.pdf')}catch(e){window.open(pdf.output('bloburl'),'_blank')}};
+      document.getElementById('sheetExt').onclick=openExternal;
+    }else{
+      pdf.save(pdfName()+'.pdf');
+    }
+  }catch(e){
+    console.error(e);
+    // 라이브러리를 못 불러오면 인쇄 창으로 대체
+    if(!IN_APP){enterPrint();setTimeout(()=>{window.print();setTimeout(exitPrint,500)},80)}
+    else showSheet('<h3>PDF를 만들지 못했어요</h3><p>인터넷 연결을 확인하거나, 외부 브라우저(크롬·사파리)에서 다시 열어 주세요.</p><div class="sheet-btns"><button class="btn primary" id="sheetExt">외부 브라우저로 열기</button></div>'),document.getElementById('sheetExt').onclick=openExternal;
+  }finally{pdfBtn.disabled=false;pdfBtn.textContent=label}
+};
+if(IN_APP){
+  const bar=document.createElement('div');bar.className='inapp-bar';
+  bar.innerHTML='앱 안 브라우저에서는 저장이 안 될 수 있어요. <button type="button">크롬·사파리로 열기</button>';
+  bar.querySelector('button').onclick=openExternal;
+  document.querySelector('.wrap').prepend(bar);
+}
 
 /* ---------- ③ 참여자 사진 ---------- */
 const PHOTO_KEY='spectra-interview-photos-v1';
