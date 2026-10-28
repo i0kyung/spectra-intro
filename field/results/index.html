@@ -125,7 +125,7 @@ let rows=[];
 async function load(){
   errEl.textContent='';
   try{
-    rows=await rpc('read_field_responses',{pass:passEl.value.trim()});
+    rows=(await rpc('read_field_responses',{pass:passEl.value.trim()})).filter(r=>r.survey==='cafe-staff-v1');
     try{localStorage.setItem('spectra-results-pass',passEl.value.trim())}catch(e){}
     document.getElementById('gate').classList.add('hidden');document.getElementById('out').classList.remove('hidden');
     render();
