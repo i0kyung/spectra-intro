@@ -100,7 +100,7 @@ input{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inh
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const SB_URL='https://poxghexfwsjgwlcrvwgg.supabase.co';
-const SB_KEY='sb_publishable_Doqbm4V9iKbO722q4_368w_vBpFeuQP';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBveGdoZXhmd3NqZ3dsY3J2d2dnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxNjUxNTEsImV4cCI6MjEwODc0MTE1MX0.FdtSlHG4JeR1Lo9yZWA8792ND2SnaykOhFKtklxfVvA';
 const FORM=new URL('../',location.href).href;
 const esc=v=>String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -118,7 +118,7 @@ const passEl=document.getElementById('pass'),errEl=document.getElementById('err'
 try{passEl.value=localStorage.getItem('spectra-results-pass')||''}catch(e){}
 async function rpc(fn,body){
   const r=await fetch(`${SB_URL}/rest/v1/rpc/${fn}`,{method:'POST',headers:{apikey:SB_KEY,Authorization:`Bearer ${SB_KEY}`,'Content-Type':'application/json'},body:JSON.stringify(body)});
-  if(!r.ok){const t=await r.text();throw new Error(/wrong passcode/.test(t)?'비밀번호가 맞지 않아요.':'불러오지 못했어요. 잠시 뒤 다시 해 주세요.')}
+  if(!r.ok){const t=await r.text();throw new Error(/wrong passcode/.test(t)?'비밀번호가 맞지 않아요.':'불러오지 못했어요 ('+r.status+' '+t.slice(0,100)+')')}
   return r.json();
 }
 let rows=[];

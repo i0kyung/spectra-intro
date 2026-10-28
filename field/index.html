@@ -227,7 +227,7 @@ h2{font-size:21px;line-height:1.38;letter-spacing:-.02em;margin:2px 0 6px}
 <script>
 /* ---------- 설정 ---------- */
 const SB_URL='https://poxghexfwsjgwlcrvwgg.supabase.co';
-const SB_KEY='sb_publishable_Doqbm4V9iKbO722q4_368w_vBpFeuQP';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBveGdoZXhmd3NqZ3dsY3J2d2dnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxNjUxNTEsImV4cCI6MjEwODc0MTE1MX0.FdtSlHG4JeR1Lo9yZWA8792ND2SnaykOhFKtklxfVvA';
 const SURVEY='cafe-staff-v1';
 const MAX_REC=60;
 
@@ -329,7 +329,7 @@ sync();
 const blobToB64=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(b)});
 async function post(table,body){
   const r=await fetch(`${SB_URL}/rest/v1/${table}`,{method:'POST',headers:{apikey:SB_KEY,Authorization:`Bearer ${SB_KEY}`,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(body)});
-  if(!r.ok)throw new Error(await r.text());
+  if(!r.ok)throw new Error(r.status+' '+(await r.text()).slice(0,120));
 }
 let sending=false;
 async function submit(){
@@ -349,7 +349,7 @@ async function submit(){
     go(order.indexOf('done'));
   }catch(e){
     console.error(e);
-    err.textContent='전송이 안 됐어요. 인터넷 연결을 확인하고 한 번만 다시 눌러 주세요.';
+    err.textContent='전송이 안 됐어요. 인터넷 연결을 확인하고 한 번만 다시 눌러 주세요. ('+String(e.message||e).slice(0,80)+')';
     nextBtn.disabled=false;nextBtn.textContent='다시 보내기';sending=false;
   }
 }
