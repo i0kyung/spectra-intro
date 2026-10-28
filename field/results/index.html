@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>현장 인터뷰 인사이트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#0f172a;--sub:#475569;--mute:#94a3b8;--line:#e2e8f0;--blue:#2563eb;--blue-soft:#eaf1ff;--blue-deep:#1e3a8a;--ok:#047857;--ok-soft:#e7f7ef;--mid:#b45309;--mid-soft:#fff7e6;--low:#be123c;--low-soft:#fff0f3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 80px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--blue)}
+h1{font-size:26px;margin:4px 0 6px;letter-spacing:-.02em}
+h2{font-size:18px;margin:0 0 10px;letter-spacing:-.01em}
+.lead{color:var(--sub);margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:15px;background:#fff;min-width:0;flex:1 1 160px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;color:var(--ink)}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.err{color:var(--low);font-size:13px;margin-top:6px}
+.hidden{display:none!important}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.qr-box{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+#qr{background:#fff;padding:10px;border-radius:12px;border:1px solid var(--line)}
+#qr img,#qr canvas{display:block;width:180px;height:180px}
+.link{font-size:12px;color:var(--sub);word-break:break-all}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.stat b{display:block;font-size:24px;letter-spacing:-.02em}
+.stat span{font-size:12px;color:var(--sub)}
+.hyp{border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;background:#fff}
+.hyp-top{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.hyp-id{font-size:12px;font-weight:800;color:var(--blue);background:var(--blue-soft);border-radius:6px;padding:1px 7px}
+.hyp h3{font-size:15px;margin:0;flex:1 1 200px}
+.badge{font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px}
+.b-ok{background:var(--ok-soft);color:var(--ok)}.b-mid{background:var(--mid-soft);color:var(--mid)}.b-low{background:var(--low-soft);color:var(--low)}.b-na{background:#f1f5f9;color:var(--mute)}
+.meter{height:8px;background:var(--line);border-radius:99px;margin:10px 0 6px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--blue);border-radius:99px}
+.hyp p{margin:4px 0 0;font-size:13px;color:var(--sub)}
+.hyp .next{color:var(--ink)}
+.q{margin:14px 0}
+.q-title{font-size:14px;font-weight:700;margin-bottom:6px}
+.bar-row{display:grid;grid-template-columns:minmax(120px,42%) 1fr 34px;gap:8px;align-items:center;font-size:13px;margin:4px 0}
+.bar-row .lab{color:var(--sub);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-row .track{height:10px;background:#f1f5f9;border-radius:99px;overflow:hidden}
+.bar-row .track i{display:block;height:100%;background:var(--blue);border-radius:99px}
+.bar-row .n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.resp{border-top:1px solid var(--line);padding:14px 0}
+.resp:first-child{border-top:0}
+.resp-head{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline;font-size:13px;color:var(--sub)}
+.resp-head b{color:var(--ink);font-size:15px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:13px;margin-top:8px}
+.kv dt{color:var(--mute)}.kv dd{margin:0}
+.quote{margin:6px 0 0;padding-left:10px;border-left:3px solid #f59e0b;font-size:14px;color:#334155}
+.voices{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.voices audio{width:100%;height:36px}
+.empty{color:var(--mute);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">SPECTRA · 현장 인터뷰</div>
+  <h1>현장 인터뷰 인사이트</h1>
+  <p class="lead">카페 직원·사장님이 직접 남긴 답을 모아 가설별로 정리해요.</p>
+
+  <div class="card">
+    <h2>현장에서 보여줄 QR</h2>
+    <div class="qr-box">
+      <div id="qr"></div>
+      <div style="flex:1 1 220px">
+        <p class="lead" style="font-size:14px">카페 이름을 넣으면 첫 화면에 미리 채워져요. 상대가 이 QR을 찍기만 하면 연락처 없이 바로 답이 들어와요.</p>
+        <div class="row" style="margin-top:10px"><input id="qrPlace" placeholder="카페 이름 (선택)"><button class="btn" id="copyLink">링크 복사</button></div>
+        <p class="link" id="qrLink"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="gate">
+    <h2>결과 보기</h2>
+    <div class="row"><input id="pass" type="password" placeholder="결과 비밀번호" autocomplete="current-password"><button class="btn primary" id="load">불러오기</button></div>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="out" class="hidden">
+    <div class="row" style="justify-content:flex-end;margin-top:4px"><button class="btn" id="reload">새로고침</button><button class="btn" id="csv">CSV 받기</button></div>
+    <div class="stats" id="stats"></div>
+    <div class="card"><h2>가설 검증</h2><div id="hyps"></div>
+      <p class="lead" style="font-size:12px;margin-top:8px">판정 · 응답 3개 미만은 표본 부족 · 60% 이상 지지 · 30~60% 부분 지지 · 30% 미만 약함. 숫자보다 아래 원문과 목소리가 먼저예요.</p></div>
+    <div class="card"><h2>문항별 응답</h2><div id="bars"></div></div>
+    <div class="card"><h2>응답 원문</h2><div id="list"></div></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const SB_URL='https://poxghexfwsjgwlcrvwgg.supabase.co';
+const SB_KEY='sb_publishable_Doqbm4V9iKbO722q4_368w_vBpFeuQP';
+const FORM=new URL('../',location.href).href;
+const esc=v=>String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- QR ---------- */
+const qrBox=document.getElementById('qr'),qrPlace=document.getElementById('qrPlace'),qrLink=document.getElementById('qrLink');
+let qr=null;
+function linkFor(){const p=qrPlace.value.trim();return FORM+(p?`?place=${encodeURIComponent(p)}`:'')}
+function drawQR(){const url=linkFor();qrLink.textContent=url;qrBox.innerHTML='';if(window.QRCode)qr=new QRCode(qrBox,{text:url,width:360,height:360,correctLevel:QRCode.CorrectLevel.M})}
+qrPlace.oninput=drawQR;
+document.getElementById('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(linkFor());alert('링크를 복사했어요.')}catch(e){prompt('복사하세요',linkFor())}};
+drawQR();
+
+/* ---------- 불러오기 ---------- */
+const passEl=document.getElementById('pass'),errEl=document.getElementById('err');
+try{passEl.value=localStorage.getItem('spectra-results-pass')||''}catch(e){}
+async function rpc(fn,body){
+  const r=await fetch(`${SB_URL}/rest/v1/rpc/${fn}`,{method:'POST',headers:{apikey:SB_KEY,Authorization:`Bearer ${SB_KEY}`,'Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!r.ok){const t=await r.text();throw new Error(/wrong passcode/.test(t)?'비밀번호가 맞지 않아요.':'불러오지 못했어요. 잠시 뒤 다시 해 주세요.')}
+  return r.json();
+}
+let rows=[];
+async function load(){
+  errEl.textContent='';
+  try{
+    rows=await rpc('read_field_responses',{pass:passEl.value.trim()});
+    try{localStorage.setItem('spectra-results-pass',passEl.value.trim())}catch(e){}
+    document.getElementById('gate').classList.add('hidden');document.getElementById('out').classList.remove('hidden');
+    render();
+  }catch(e){errEl.textContent=e.message}
+}
+document.getElementById('load').onclick=load;
+passEl.onkeydown=e=>{if(e.key==='Enter')load()};
+document.getElementById('reload').onclick=load;
+if(passEl.value)load();
+
+/* ---------- 분석 ---------- */
+const A=r=>r.answers||{};
+const has=(r,q,v)=>(A(r)[q]||[]).includes(v);
+const any=(r,q,vs)=>(A(r)[q]||[]).some(x=>vs.includes(x));
+const answeredQ=(r,q)=>(A(r)[q]||[]).length>0;
+function judge(yes,n){if(n<3)return['표본 부족','b-na'];const p=yes/n;return p>=.6?['지지','b-ok']:p>=.3?['부분 지지','b-mid']:['약함','b-low']}
+const HYP=[
+ {id:'H1',t:'현장은 반응형 캐릭터(C)를 가장 들이고 싶어 한다',q:'pick',yes:r=>has(r,'pick','C'),
+  next:'지지되면 C를 MVP로 고정. 약하면 A·B를 고른 이유(①왜)를 보고 C 설명 방식을 바꿔 보기.'},
+ {id:'H2',t:"도입의 가장 큰 장벽은 '직원 일이 늘어나는 것'이다",q:'pain',yes:r=>any(r,'pain',['고장·오류 나면 내가 대응해야 한다','사용법을 손님에게 설명해야 한다','켜고 끄기·충전 같은 관리가 늘어난다']),
+  next:'지지되면 원격 관리·자동 켜짐·직원 설명서를 제품 기본값으로. 사업계획서의 운영자 가치에 직접 인용.'},
+ {id:'H3',t:'대관 과정은 번거로워서 연결해 주는 서비스가 필요하다',q:'hassle',yes:r=>any(r,'hassle',['날짜·시간 맞추기','가격·조건 정하기','장식·특전 세팅 도와주기','당일 손님 몰림·줄 관리','끝나고 정리·원상복구','갑작스러운 취소·노쇼'])||any(r,'host',['연락이 늦거나 자꾸 바뀐다','요청이 많고 세세하다','벽·소품 훼손이 걱정된다','약속한 시간을 넘긴다','일반 손님과 섞여서 곤란하다']),
+  next:'지지되면 플랫폼 확장의 근거. 어떤 단계가 가장 많이 나왔는지(③번 막대)를 서비스 첫 기능으로.'},
+ {id:'H4',t:'무료 시범 + 설치·철거 대행이면 써볼 의향이 생긴다',q:'terms',yes:r=>has(r,'terms','무료로 먼저 시범')&&has(r,'must','설치·철거를 업체가 대신'),
+  next:'지지되면 첫 영업 제안을 "한 달 무료 설치·철거 포함"으로. 약하면 ⑤ 원문에서 다른 조건을 찾기.'}
+];
+const QS=[
+ ['role','역할'],['pick','가장 들이고 싶은 방향'],['why','고른 이유'],['pain','예상되는 불편'],['painTop','가장 큰 걱정'],
+ ['channel','대관 문의 경로'],['hassle','대관에서 번거로운 단계'],['host','주최자와 힘든 점'],['terms','써볼 만한 조건'],['must','직원 입장에서 꼭 필요']
+];
+const SAY={q1:'① A·B·C',q2:'② 불편',q3:'③ 대관',q4:'④ 주최자',q5:'⑤ 서비스',last:'마지막 한마디'};
+function tally(q){const m=new Map();rows.forEach(r=>(q==='role'?[r.role].filter(Boolean):(A(r)[q]||[])).forEach(v=>m.set(v,(m.get(v)||0)+1)));return [...m].sort((a,b)=>b[1]-a[1])}
+function render(){
+  const n=rows.length;
+  const places=new Set(rows.map(r=>r.place).filter(Boolean));
+  const voices=rows.reduce((s,r)=>s+(r.voices||[]).length,0);
+  const avg=n?Math.round(rows.reduce((s,r)=>s+(r.duration_sec||0),0)/n/60*10)/10:0;
+  document.getElementById('stats').innerHTML=[[n,'응답'],[places.size,'카페'],[voices,'목소리 답변'],[avg+'분','평균 소요']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
+  document.getElementById('hyps').innerHTML=HYP.map(h=>{
+    const base=rows.filter(r=>answeredQ(r,h.q)||(h.id==='H3'&&answeredQ(r,'host')));const yes=base.filter(h.yes).length;const [lab,cls]=judge(yes,base.length);
+    const pct=base.length?Math.round(yes/base.length*100):0;
+    return `<div class="hyp"><div class="hyp-top"><span class="hyp-id">${h.id}</span><h3>${esc(h.t)}</h3><span class="badge ${cls}">${lab}</span></div>
+      <div class="meter"><i style="width:${pct}%"></i></div><p>${yes} / ${base.length}명 (${pct}%)</p><p class="next">다음 → ${esc(h.next)}</p></div>`}).join('');
+  document.getElementById('bars').innerHTML=QS.map(([q,t])=>{const tl=tally(q);const max=tl.length?tl[0][1]:1;
+    return `<div class="q"><div class="q-title">${t}</div>${tl.length?tl.map(([v,c])=>`<div class="bar-row"><span class="lab" title="${esc(v)}">${esc(v)}</span><span class="track"><i style="width:${c/max*100}%"></i></span><span class="n">${c}</span></div>`).join(''):'<p class="empty">아직 응답 없음</p>'}</div>`}).join('');
+  const list=document.getElementById('list');
+  list.innerHTML=n?rows.map((r,i)=>{const a=A(r),notes=a.notes||{};
+    const d=new Date(r.created_at);
+    const kv=QS.filter(([q])=>q!=='role'&&(a[q]||[]).length).map(([q,t])=>`<dt>${t}</dt><dd>${esc((a[q]||[]).join(' · '))}</dd>`).join('');
+    const qs=Object.keys(notes).filter(k=>notes[k]).map(k=>`<p class="quote"><b>${SAY[k]||k}</b> ${esc(notes[k])}</p>`).join('');
+    const vc=(r.voices||[]).length;
+    return `<div class="resp"><div class="resp-head"><b>${esc(r.place||'카페 미기재')}</b><span>${esc(r.role||'')}</span><span>${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}</span><span>${Math.round((r.duration_sec||0)/60*10)/10}분</span></div>
+      <dl class="kv">${kv}</dl>${qs}
+      ${vc?`<div class="voices" id="v${i}"><button class="btn" data-rid="${r.id}" data-i="${i}">목소리 ${vc}개 듣기</button></div>`:''}</div>`}).join(''):'<p class="empty">아직 들어온 응답이 없어요. 위 QR을 현장에서 보여 주세요.</p>';
+  list.querySelectorAll('[data-rid]').forEach(b=>b.onclick=async()=>{
+    b.disabled=true;b.textContent='불러오는 중…';
+    try{const vs=await rpc('read_field_voices',{pass:passEl.value.trim(),rid:b.dataset.rid});
+      document.getElementById('v'+b.dataset.i).innerHTML=vs.map(v=>`<div><span class="link">${SAY[v.q]||v.q} · ${v.sec||'?'}초</span><audio controls src="data:${esc(v.mime)};base64,${v.data}"></audio></div>`).join('')||'<p class="empty">목소리 파일이 없어요.</p>';
+    }catch(e){b.disabled=false;b.textContent=e.message}
+  });
+}
+/* ---------- CSV ---------- */
+document.getElementById('csv').onclick=()=>{
+  const head=['시간','카페','역할','소요(초)',...QS.filter(([q])=>q!=='role').map(([,t])=>t),...Object.values(SAY),'목소리 수'];
+  const cell=v=>`"${String(v??'').replace(/"/g,'""')}"`;
+  const lines=rows.map(r=>{const a=A(r),no=a.notes||{};return [r.created_at,r.place,r.role,r.duration_sec,...QS.filter(([q])=>q!=='role').map(([q])=>(a[q]||[]).join(' · ')),...Object.keys(SAY).map(k=>no[k]||''),(r.voices||[]).length].map(cell).join(',')});
+  const blob=new Blob(['﻿'+[head.map(cell).join(','),...lines].join('\n')],{type:'text/csv'});
+  const u=URL.createObjectURL(blob);const l=document.createElement('a');l.href=u;l.download='현장인터뷰_'+new Date().toISOString().slice(0,10)+'.csv';l.click();URL.revokeObjectURL(u);
+};
+</script>
+</body>
+</html>
